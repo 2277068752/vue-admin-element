@@ -14,7 +14,7 @@ export default new Vuex.Store({
   // 插件
   plugins: [createPersistedState({
     key: config.build.assetsPublicPath + 'vuex',
-    paths: [''],
+    paths: ['global'],
     getState: (key) => LocalStorage.get(key),
     setState: (key, state) => LocalStorage.set(key, state)
   })]

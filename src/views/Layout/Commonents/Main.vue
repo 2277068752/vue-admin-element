@@ -21,7 +21,7 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
-  .MyContain {
+  .main {
     background-color: #fff;
   }
 </style>

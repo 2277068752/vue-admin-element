@@ -39,7 +39,7 @@
 </template>
 <script>
   import BLL from './Index.js'
-
+  import menusLisit from '../../../static/json/limit.json'
   export default {
     components: {},
     data () {
@@ -49,6 +49,7 @@
           password: '123456'
         },
         loading: false,
+        menus: menusLisit,
         passwordType: 'password' // 密码控件的类型
       }
     },

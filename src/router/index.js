@@ -23,7 +23,12 @@ export default {
       redirect: 'dashboard',
       children: [{
         path: '/dashboard',
-        component: _import('Layout/Dashboard/Index')
+        name: '首页',
+        component: _import('Dashboard/Index')
+      }, {
+        path: '/icons',
+        name: '图标',
+        component: _import('Icons/Index')
       }]
     }
   ]

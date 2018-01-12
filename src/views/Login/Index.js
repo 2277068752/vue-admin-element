@@ -22,11 +22,13 @@ export default class extends Base {
       return false
     }
     this.vm.loading = true
+    // 取用户的平台权限信息，并且持久化
+    this.vm.$store.dispatch('init_sidebar_data', this.vm.menus)
     // 登录成功
     this.vm.$notify.success({
       title: '登录成功',
       message: '欢迎小主回来！'
     })
-    this.vm.$router.push({path: '/layout'})
+    this.vm.$router.push({path: '/dashboard'})
   }
 }

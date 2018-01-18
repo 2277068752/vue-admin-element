@@ -11,11 +11,15 @@ import { sync } from 'vuex-router-sync'
 import Routers from './router'
 import VueRouter from 'vue-router'
 // Element UI
-import Element from 'element-ui'
+import Element, { Notification } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 // Plugins
 import UtilsPlugin from './utils/index'
 import AlertPlugin from './plugs/Alert'
+// http
+import HttpPlugin from './http/index'
+// mock
+import './mock'
 
 // Vue.config 是一个对象，包含Vue的全局配置。可以在启动应用之前修改下列属性。
 Vue.config.silent = true // 取消Vue所有的日志和警告
@@ -37,16 +41,39 @@ const router = new VueRouter({
   base: config.build.assetsPublicPath,
   routes: Routers.routes
 })
+const dispatch = store.dispatch
 router.beforeEach((to, from, next) => {
-  next()
+  if (to.path !== '/login') {
+    let havePath = false
+    // 先判断当前访问的路由是否在roter.js中
+    let children = Routers.routes.find(_x => _x.path === '/layout').children // 所有的子栏目都是在 layout框架内部
+    if (!children) {
+      havePath = false
+    }
+    if (children.find(_x => _x.path === to.path) || (children.children && children.children.find(_x => _x.path === to.path))) {
+      havePath = true
+    }
+    if (!havePath) {
+      Notification.warning({
+        title: '扎心了！老铁',
+        message: '你当前访问的页面不存在'
+      })
+      return false
+    } else {
+      dispatch('add_tagbar', {name: to.name, path: to.path})
+      next()
+    }
+  } else {
+    next()
+  }
 })
 // 注册一个全局的after的钩子，不会改变导航
 router.afterEach((to) => {
 })
- // 插件
+// 插件
 Vue.use(UtilsPlugin)
 Vue.use(AlertPlugin)
-// const commit = store.commit
+Vue.use(HttpPlugin)
 sync(store, router)
 /* eslint-disable no-new */
 window.$globalHub = new Vue({

@@ -29,6 +29,10 @@ export default {
         path: '/icons',
         name: '图标',
         component: _import('Icons/Index')
+      }, {
+        path: '/components/table/list',
+        name: '表格',
+        component: _import('Table/Index')
       }]
     }
   ]

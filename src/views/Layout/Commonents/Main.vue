@@ -21,7 +21,10 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
+  @import "../../../assets/styles/mixins";
+
   .main {
     background-color: #fff;
+    .scrollBar()
   }
 </style>

@@ -1,9 +1,10 @@
+@import "../../../../assets/styles/variable";
 .hideSidebar {
   .sidebar-container, .sidebar-container .el-menu {
-    width: 36px !important;
+    width: @hide-side-bar-width !important;
   }
   .main-container {
-    margin-left: 36px !important;
+    padding-left: @hide-side-bar-width !important;
   }
 }
 

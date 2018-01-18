@@ -32,7 +32,7 @@
           {
             "icon": "",
             "name": "分页表格",
-            "link": "/components/table/table_by_page",
+            "link": "/components/table/list",
             "sort": 321
           }
         ]

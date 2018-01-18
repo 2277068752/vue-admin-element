@@ -23,6 +23,8 @@ module.exports = {
   },
 
   build: {
+    offlineApiUrl: 'http://localhost:8091',
+    onlineApiUrl: 'http://localhost:8091',
     index: path.resolve(__dirname, '../dist/index.html'),
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',

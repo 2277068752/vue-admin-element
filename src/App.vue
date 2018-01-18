@@ -19,4 +19,5 @@
 
 <style lang="less" rel="stylesheet/less">
   @import "./assets/styles/common";
+  @import "./assets/styles/variable";
 </style>

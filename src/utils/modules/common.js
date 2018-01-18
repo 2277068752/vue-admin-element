@@ -1,6 +1,8 @@
 ﻿var chars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 // 主流浏览器内核
 let elementStyle = document.createElement('div').style
+// 格式化日期插件
+let moment = require('moment')
 let vendor = (() => {
   let transfromNames = {
     webkit: 'webkitTransform',
@@ -153,5 +155,11 @@ export default {
       return style
     }
     return vendor + style.charAt(0).toUpperCase() + style.substr(1)
+  },
+  dateFormat (date, type) {
+    if (!date) {
+      return ''
+    }
+    return moment(date).format(type)
   }
 }

@@ -20,7 +20,7 @@ export default {
       path: '/layout',
       name: '框架',
       component: Layout,
-      redirect: 'dashboard',
+      redirect: '/dashboard',
       children: [{
         path: '/dashboard',
         name: '首页',
@@ -30,7 +30,7 @@ export default {
         name: '图标',
         component: _import('Icons/Index')
       }, {
-        path: '/components/table/list',
+        path: '/table/list',
         name: '表格',
         component: _import('Table/Index')
       }]

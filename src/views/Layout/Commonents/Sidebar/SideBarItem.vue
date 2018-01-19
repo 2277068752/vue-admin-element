@@ -9,14 +9,14 @@
           <span>{{ item.name }}</span>
         </template>
       </el-menu-item>
-      <el-submenu v-else :index="item.name ||item.link" :key="item.name">
+      <el-submenu v-else :index="item.link" :key="item.name">
         <template slot="title">
           <span class="axon-icon" v-html="item.icon"></span>
           <span>{{ item.name }}</span>
         </template>
 
         <template v-for="(child, childIndex) in item.children">
-          <el-menu-item :index="child.path" v-if="!child.children" @click="sideBarPath(child)">
+          <el-menu-item :index="child.link" :key="child.name" v-if="!child.children" @click="sideBarPath(child)">
             <template slot="title">
               <span>{{ child.name }}</span>
             </template>

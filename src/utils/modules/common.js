@@ -161,5 +161,12 @@ export default {
       return ''
     }
     return moment(date).format(type)
+  },
+  parseToDom (str) {
+    let div = document.createElement('div')
+    if (typeof str === 'string') {
+      div.innerHTML = str
+    }
+    return div.childNodes
   }
 }

@@ -1,7 +1,8 @@
 <!--region 封装的分页 table-->
 <template>
   <div class="table">
-    <el-table id="iTable" v-loading.iTable="options.loading" :data="list" :max-height="height" :stripe="options.stripe" ref="mutipleTable"
+    <el-table id="iTable" v-loading.iTable="options.loading" :data="list" :max-height="height" :stripe="options.stripe"
+              ref="mutipleTable"
               @selection-change="handleSelectionChange">
       <!--region 选择框-->
       <el-table-column v-if="options.mutiSelect" type="selection" style="width: 55px;">
@@ -14,18 +15,23 @@
                          :align="column.align"
                          :width="column.width">
           <template slot-scope="scope">
-            <template v-if="column.formatter">
-              <span v-html="column.formatter(scope.row, column)"></span>
+            <template v-if="!column.render">
+              <template v-if="column.formatter">
+                <span v-html="column.formatter(scope.row, column)"></span>
+              </template>
+              <template v-else>
+                <span>{{scope.row[column.prop]}}</span>
+              </template>
             </template>
             <template v-else>
-              <span>{{scope.row[column.prop]}}</span>
+              <expand-dom :column="column" :row="scope.row" :render="column.render" :index="index"></expand-dom>
             </template>
           </template>
         </el-table-column>
       </template>
       <!--endregion-->
       <!--region 按钮操作组-->
-      <el-table-column label="操作" align="center" :width="operates.width" :fixed="operates.fixed"
+      <el-table-column ref="fixedColumn" label="操作" align="center" :width="operates.width" :fixed="operates.fixed"
                        v-if="operates.list.filter(_x=>_x.show === true).length > 0">
         <template slot-scope="scope">
           <div class="operate-group">
@@ -48,6 +54,16 @@
                    :page-size="pageSize"
                    :page-sizes="[10, 20, 50]" :current-page="pageIndex" layout="total,sizes, prev, pager, next,jumper"
                    :total="total"></el-pagination>
+    <!--endregion-->
+    <!--region 数据筛选-->
+    <div class="filter-data fix-right" v-show="options.filter" @click="showfilterDataDialog">
+      <span>筛选过滤</span>
+    </div>
+    <!--endregion-->
+    <!--region 表格操作-->
+    <div class="table-action fix-right" v-show="options.action" @click="showActionTableDialog">
+      <span>表格操作</span>
+    </div>
     <!--endregion-->
   </div>
 </template>
@@ -84,17 +100,41 @@
         default: {
           stripe: false, // 是否为斑马纹 table
           highlightCurrentRow: false // 是否要高亮当前行
-        }
+        },
+        filter: false,
+        action: false
       } // table 表格的控制参数
     },
-    components: {},
+    components: {
+      expandDom: {
+        functional: true,
+        props: {
+          row: Object,
+          render: Function,
+          index: Number,
+          column: {
+            type: Object,
+            default: null
+          }
+        },
+        render: (h, ctx) => {
+          const params = {
+            row: ctx.props.row,
+            index: ctx.props.index
+          }
+          if (ctx.props.column) params.column = ctx.props.column
+          return ctx.props.render(h, params)
+        }
+      }
+    },
     data () {
       return {
         pageIndex: 1,
         multipleSelection: [] // 多行选中
       }
     },
-    mounted () {},
+    mounted () {
+    },
     computed: {
       height () {
         return this.$utils.Common.getWidthHeight().height - this.otherHeight
@@ -115,6 +155,14 @@
       handleSelectionChange (val) {
         this.multipleSelection = val
         this.$emit('handleSelectionChange', val)
+      },
+      // 显示 筛选弹窗
+      showfilterDataDialog () {
+        this.$emit('handleFilter')
+      },
+      // 显示 表格操作弹窗
+      showActionTableDialog () {
+        this.$emit('handelAction')
       }
     }
   }
@@ -129,7 +177,7 @@
       float: right;
       margin: 20px;
     }
-    .el-table__header-wrapper {
+    .el-table__header-wrapper, .el-table__fixed-header-wrapper {
       thead {
         tr {
           th {
@@ -156,6 +204,29 @@
         display: block;
         flex: 0 0 50%;
       }
+    }
+    .filter-data {
+      top: e("calc((100% - 100px) / 3)");
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+    .table-action {
+      top: e("calc((100% - 100px) / 2)");
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+    .fix-right {
+      position: absolute;
+      right: 0;
+      height: 100px;
+      color: #ffffff;
+      width: 30px;
+      display: block;
+      z-index: 1005;
+      writing-mode: vertical-rl;
+      text-align: center;
+      line-height: 28px;
+      border-bottom-left-radius: 6px;
+      border-top-left-radius: 6px;
+      cursor: pointer;
     }
   }
 </style>

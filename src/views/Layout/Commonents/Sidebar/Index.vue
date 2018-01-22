@@ -31,8 +31,7 @@
         return this.sidebar.open === 0
       }
     },
-    methods: {
-    }
+    methods: {}
   }
 </script>
 

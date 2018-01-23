@@ -34,6 +34,10 @@ export default {
         name: '表格',
         component: _import('Table/Index')
       }, {
+        path: '/upload/excel',
+        name: 'excel文件上传解析',
+        component: _import('UploadExcel/Index')
+      }, {
         path: '/error/404',
         name: '404',
         component: _import('Errors/404_error')

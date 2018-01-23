@@ -36,6 +36,20 @@
             "sort": 321
           }
         ]
+      },
+      {
+        "icon": "&#xe626;",
+        "name": "上传",
+        "link": "",
+        "sort": 33,
+        "children": [
+          {
+            "icon": "",
+            "name": "Excel上传",
+            "link": "/upload/excel",
+            "sort": 331
+          }
+        ]
       }
     ]
   },

@@ -43,6 +43,7 @@ const router = new VueRouter({
 })
 const dispatch = store.dispatch
 router.beforeEach((to, from, next) => {
+  console.log(' to:', to)
   if (to.path !== '/login') {
     let havePath = false
     // 先判断当前访问的路由是否在roter.js中

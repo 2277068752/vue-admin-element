@@ -8,7 +8,7 @@ export default {
   routes: [
     {
       path: '/',
-      name: '登录',
+      name: '默认页面',
       component: _import('Login/Index')
     },
     {

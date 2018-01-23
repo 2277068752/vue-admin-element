@@ -58,6 +58,7 @@
   .filter-collapse {
     background-color: #fff;
     position: relative;
+    padding: 0 12px;
     .filter-btn {
       position: absolute;
       right: 40px;

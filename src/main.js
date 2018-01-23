@@ -43,7 +43,7 @@ const router = new VueRouter({
 })
 const dispatch = store.dispatch
 router.beforeEach((to, from, next) => {
-  if (to.path !== '/login' && to.path !== '/error/404') {
+  if (to.path !== '/login' && to.path !== '/error/404' && to.path !== '/error/401') {
     let havePath = false
     // 先判断当前访问的路由是否在roter.js中
     let children = Routers.routes.find(_x => _x.path === '/layout').children // 所有的子栏目都是在 layout框架内部

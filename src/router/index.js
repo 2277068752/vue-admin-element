@@ -41,6 +41,10 @@ export default {
         path: '/error/404',
         name: '404',
         component: _import('Errors/404_error')
+      }, {
+        path: '/error/401',
+        name: '401',
+        component: _import('Errors/401_error')
       }]
     }
   ]

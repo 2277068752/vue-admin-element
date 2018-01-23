@@ -64,6 +64,12 @@
         "name": "404",
         "link": "/error/404",
         "sort": 41
+      },
+      {
+        "icon": "",
+        "name": "401",
+        "link": "/error/401",
+        "sort": 42
       }
     ]
   }

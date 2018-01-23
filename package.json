@@ -32,6 +32,7 @@
     "copy-webpack-plugin": "^4.0.1",
     "crypto-js": "^3.1.9-1",
     "css-loader": "^0.28.0",
+    "echarts": "^4.0.2",
     "element-ui": "^2.0.10",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^10.2.1",

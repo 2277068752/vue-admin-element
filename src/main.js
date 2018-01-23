@@ -11,7 +11,7 @@ import { sync } from 'vuex-router-sync'
 import Routers from './router'
 import VueRouter from 'vue-router'
 // Element UI
-import Element, { Notification } from 'element-ui'
+import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 // Plugins
 import UtilsPlugin from './utils/index'
@@ -43,8 +43,7 @@ const router = new VueRouter({
 })
 const dispatch = store.dispatch
 router.beforeEach((to, from, next) => {
-  console.log(' to:', to)
-  if (to.path !== '/login') {
+  if (to.path !== '/login' && to.path !== '/error/404') {
     let havePath = false
     // 先判断当前访问的路由是否在roter.js中
     let children = Routers.routes.find(_x => _x.path === '/layout').children // 所有的子栏目都是在 layout框架内部
@@ -55,11 +54,7 @@ router.beforeEach((to, from, next) => {
       havePath = true
     }
     if (!havePath) {
-      Notification.warning({
-        title: '扎心了！老铁',
-        message: '你当前访问的页面不存在'
-      })
-      return false
+      next('/error/404')
     } else {
       dispatch('add_tagbar', {name: to.name, path: to.path})
       next()

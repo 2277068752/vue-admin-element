@@ -4,6 +4,7 @@
     <div class="main-container">
       <navbar></navbar>
       <tagbar></tagbar>
+      <div class="clearfix"></div>
       <main-view></main-view>
     </div>
   </div>

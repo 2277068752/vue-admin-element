@@ -33,6 +33,10 @@ export default {
         path: '/table/list',
         name: '表格',
         component: _import('Table/Index')
+      }, {
+        path: '/error/404',
+        name: '404',
+        component: _import('Errors/404_error')
       }]
     }
   ]

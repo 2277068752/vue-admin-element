@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <section class="main-app" style="min-height: 100%;">
+    <section class="main-app" :style="{height:height}">
       <transition name="fade" mode="out-in">
         <keep-alive>
           <router-view></router-view>
@@ -16,6 +16,11 @@
       return {}
     },
     mounted () {},
+    computed: {
+      height () {
+        return this.$utils.Common.getWidthHeight().height - 88 + 'px'
+      }
+    },
     methods: {}
   }
 </script>
@@ -24,7 +29,7 @@
   @import "../../../assets/styles/mixins";
 
   .main {
-    background-color: #fff;
+    height: 100%;
     .scrollBar()
   }
 </style>

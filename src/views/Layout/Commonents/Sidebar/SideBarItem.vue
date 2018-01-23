@@ -3,7 +3,7 @@
     <!--判断menu级别-->
     <template v-for="(item, index) in routes">
       <el-menu-item v-if="!item.children" :index="item.link" :class="{'submenu-title-noDropdown':!isNest}"
-                    @click="sideBarPath(item)">
+                    @click.native="sideBarPath(item)">
         <template slot="title">
           <span class="axon-icon" v-html="item.icon"></span>
           <span>{{ item.name }}</span>
@@ -16,7 +16,7 @@
         </template>
 
         <template v-for="(child, childIndex) in item.children">
-          <el-menu-item :index="child.link" v-if="!child.children" @click="sideBarPath(child)">
+          <el-menu-item :index="child.link" v-if="!child.children" @click.native="sideBarPath(child)">
             <template slot="title">
               <span>{{ child.name }}</span>
             </template>
@@ -48,6 +48,7 @@
     methods: {
       // 路由跳转
       sideBarPath (item) {
+        console.log(' item:', item)
         this.$router.push({path: item.link})
       }
     }

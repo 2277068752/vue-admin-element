@@ -1,7 +1,7 @@
 <template>
   <div class="slide-bar">
     <scroll-bar>
-      <el-menu mode="vertical" :default-active="$route.fullPath" :collapse="isCollapse"
+      <el-menu mode="vertical" :default-active="$route.fullPath" :collapse="isCollapse" :unique-opened="true"
                background-color="#304156"
                text-color="#bfcbd9" active-text-color="#409EFF">
         <sidebar-item :routes="sidebar.list"></sidebar-item>

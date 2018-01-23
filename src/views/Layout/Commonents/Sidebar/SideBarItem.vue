@@ -54,13 +54,24 @@
   }
 </script>
 
-<style lang="less" rel="stylesheet/less" scoped>
+<style lang="less" rel="stylesheet/less">
   .slide-bar-item {
-    background-color: #fff;
     height: 100%;
     width: 100%;
     .el-menu {
       border: 0;
+      @baColor: #1f2d3d;
+      .el-menu-item {
+        background-color: @baColor !important;
+      }
+      .nest-menu {
+        .el-submenu__title {
+          background-color: @baColor !important;
+        }
+        .el-menu-item {
+          background-color: @baColor !important;
+        }
+      }
       span.axon-icon {
         color: rgb(191, 203, 217);
         font-size: 16px;

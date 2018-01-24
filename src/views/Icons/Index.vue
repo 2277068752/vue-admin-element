@@ -4,7 +4,7 @@
       <template v-for="(item, index) in icons">
         <el-col :span="3" class="item">
           <span class="axon-icon" v-html="item.icon"></span>
-          <p>{{item.name}}</p>
+          <p>{{item.name}} <span style="color: #ff6900;">[ {{item.icon}} ]</span></p>
         </el-col>
       </template>
     </el-row>

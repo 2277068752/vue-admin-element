@@ -30,6 +30,7 @@
 
   .main {
     height: 100%;
+    overflow-y: auto;
     .scrollBar()
   }
 </style>

@@ -6,8 +6,8 @@
         <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
           <div class='card-panel' @click="handleSetLineChartData(panel.id)">
             <div class="card-panel-icon-wrapper icon-people">
-              <div class="card-panel-icon">
-                <span class="axon-icon" :style="{color:panel.color}" v-html="panel.icon"></span>
+              <div :class="`card-panel-icon panel-${panel.color}`">
+                <span class="axon-icon" v-html="panel.icon"></span>
               </div>
             </div>
             <div class="card-panel-description">
@@ -80,28 +80,28 @@
             label: 'Demo1',
             value: 102400,
             icon: '&#xe63e;',
-            color: '#40c9c6'
+            color: 1// '#40c9c6'
           },
           {
             id: 'messages',
             label: 'Demo2',
             value: 81212,
             icon: '&#xe72d;',
-            color: '#36a3f7'
+            color: 2 // '#36a3f7'
           },
           {
             id: 'purchases',
             label: 'Demo3',
             value: 9280,
             icon: '&#xe736;',
-            color: '#f4516c'
+            color: 3 // '#f4516c'
           },
           {
             id: 'shoppings',
             label: 'Demo4',
             value: 13600,
             icon: '&#xe61b;',
-            color: '#34bfa3'
+            color: 4 // '#34bfa3'
           }
         ],
         lineChartData: lineChartData.newVisitis
@@ -110,7 +110,8 @@
     mounted () {},
     methods: {
       handleSetLineChartData (panel) {
-        this.lineChartData = lineChartData[panel.id]
+        console.log(' panel:', panel)
+        this.lineChartData = lineChartData[panel]
       }
     }
   }
@@ -139,8 +140,33 @@
 
         &:hover {
           .card-panel-icon-wrapper {
-            color: #fff;
             .card-panel-icon {
+              border-radius: 4px;
+              transition: all 0.38s ease-out;
+              &.panel-1 {
+                background-color: #40c9c6;
+                .axon-icon {
+                  color: #ffffff;
+                }
+              }
+              &.panel-2 {
+                background-color: #36a3f7;
+                .axon-icon {
+                  color: #ffffff;
+                }
+              }
+              &.panel-3 {
+                background-color: #f4516c;
+                .axon-icon {
+                  color: #ffffff;
+                }
+              }
+              &.panel-4 {
+                background-color: #34bfa3;
+                .axon-icon {
+                  color: #ffffff;
+                }
+              }
             }
           }
         }
@@ -149,9 +175,31 @@
           .card-panel-icon {
             width: 60px;
             height: 60px;
+            margin-top: 29px;
+            text-align: center;
+            line-height: 60px;
+            &.panel-1 {
+              .axon-icon {
+                color: #40c9c6;
+              }
+            }
+            &.panel-2 {
+              .axon-icon {
+                color: #36a3f7;
+              }
+            }
+            &.panel-3 {
+              .axon-icon {
+                color: #f4516c;
+              }
+            }
+            &.panel-4 {
+              .axon-icon {
+                color: #34bfa3;
+              }
+            }
             .axon-icon {
               font-size: 48px;
-              line-height: 108px;
             }
           }
         }

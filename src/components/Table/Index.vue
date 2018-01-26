@@ -49,60 +49,52 @@
     </el-table>
     <div style="height:12px"></div>
     <!--region 分页-->
-    <el-pagination @size-change="handleSizeChange"
+    <el-pagination v-if="pagination" @size-change="handleSizeChange"
                    @current-change="handleIndexChange"
-                   :page-size="pageSize"
-                   :page-sizes="[10, 20, 50]" :current-page="pageIndex" layout="total,sizes, prev, pager, next,jumper"
+                   :page-size="tableCurrentPagination.pageSize"
+                   :page-sizes="this.tableCurrentPagination.pageArray" :current-page="tableCurrentPagination.pageIndex"
+                   layout="total,sizes, prev, pager, next,jumper"
                    :total="total"></el-pagination>
-    <!--endregion-->
-    <!--region 数据筛选-->
-    <div class="filter-data fix-right" v-show="options.filter" @click="showfilterDataDialog">
-      <span>筛选过滤</span>
-    </div>
-    <!--endregion-->
-    <!--region 表格操作-->
-    <div class="table-action fix-right" v-show="options.action" @click="showActionTableDialog">
-      <span>表格操作</span>
-    </div>
     <!--endregion-->
   </div>
 </template>
 <!--endregion-->
 <script>
+  const _pageArray = [20, 50, 100] // 每页展示条数的控制集合
   export default {
     props: {
       list: {
         type: Array,
-        default: []
+        default: [] // prop:表头绑定的地段，label：表头名称，align：每列数据展示形式（left, center, right），width:列宽
       }, // 数据列表
       columns: {
         type: Array,
-        default: []
-      }, // 需要展示的列 === prop：列数据对应的属性，label：列名，align：对齐方式，width：列宽
+        default: [] // 需要展示的列 === prop：列数据对应的属性，label：列名，align：对齐方式，width：列宽
+      },
       operates: {
-        type: Array,
-        default: []
-      }, // 操作按钮组 === label: 文本，type :类型（primary / success / warning / danger / info / text），show：是否显示，icon：按钮图标，plain：是否朴素按钮，disabled：是否禁用，method：回调方法
+        type: Object,
+        default: {} // width:按钮列宽，fixed：是否固定（left,right）,按钮集合 === label: 文本，type :类型（primary / success / warning / danger / info / text），show：是否显示，icon：按钮图标，plain：是否朴素按钮，disabled：是否禁用，method：回调方法
+      },
       total: {
         type: Number,
         default: 0
       }, // 总数
-      pageSize: {
-        type: Number,
-        default: 20
-      }, // 每页显示的数量
+      pagination: {
+        type: Object,
+        default: null // 分页参数 === pageSize:每页展示的条数，pageIndex:当前页，pageArray: 每页展示条数的控制集合，默认 _page_array
+      },
       otherHeight: {
         type: Number,
         default: 160
-      }, // 用来计算表格的高度
+      }, // 计算表格的高度
       options: {
         type: Object,
         default: {
           stripe: false, // 是否为斑马纹 table
-          highlightCurrentRow: false // 是否要高亮当前行
-        },
-        filter: false,
-        action: false
+          loading: false, // 是否添加表格loading加载动画
+          highlightCurrentRow: false, // 是否支持当前行高亮显示
+          mutiSelect: false // 是否支持列表项选中功能
+        }
       } // table 表格的控制参数
     },
     components: {
@@ -130,12 +122,22 @@
     data () {
       return {
         pageIndex: 1,
+        tableCurrentPagination: {},
         multipleSelection: [] // 多行选中
       }
     },
+    created () {},
     mounted () {
+      if (this.pagination && !this.pagination.pageSizes) {
+        this.pagination.pageArray = _pageArray // 每页展示条数控制
+      }
+      this.tableCurrentPagination = this.pagination || {
+        pageSize: this.total,
+        pageIndex: 1
+      } // 判断是否需要分页
     },
     computed: {
+      // 计算table高度
       height () {
         return this.$utils.Common.getWidthHeight().height - this.otherHeight
       }
@@ -143,13 +145,20 @@
     methods: {
       // 切换每页显示的数量
       handleSizeChange (size) {
-        this.$emit('handleSizeChange', size)
-        this.pageIndex = 1
+        if (this.pagination) {
+          this.tableCurrentPagination = {
+            pageIndex: 1,
+            pageSize: size
+          }
+          this.$emit('handleSizeChange', this.tableCurrentPagination)
+        }
       },
       // 切换页码
-      handleIndexChange (index) {
-        this.$emit('handleIndexChange', index)
-        this.pageIndex = index
+      handleIndexChange (currnet) {
+        if (this.pagination) {
+          this.tableCurrentPagination.pageIndex = currnet
+          this.$emit('handleIndexChange', this.tableCurrentPagination)
+        }
       },
       // 多行选中
       handleSelectionChange (val) {

@@ -1,7 +1,7 @@
 import Mock from 'mockjs'
 
 let list = []
-const count = 1000
+const count = 879
 
 for (let i = 0; i < count; i++) {
   list.push(Mock.mock({

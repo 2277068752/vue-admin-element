@@ -33,11 +33,19 @@
     components: {},
     data () {
       return {
+        filter: {},
         filterList: []
       }
     },
+    beforeUpdate () {
+      this.filter = this.filterData
+    },
     computed: {},
-    watch: {},
+    watch: {
+      filter (val) {
+        this.formatFilterList()
+      }
+    },
     mounted () {
     },
     methods: {
@@ -48,7 +56,7 @@
       },
       // 整理筛选数据
       formatFilterList () {
-        this.filterList = Object.entries(this.filterData)
+        this.filterList = Object.entries(this.filter)
       }
     }
   }

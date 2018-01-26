@@ -21,6 +21,7 @@
     <!--region table 表格-->
     <i-table :list="list" :total="total" :otherHeight="otherHeight" @handleSizeChange="handleSizeChange"
              @handleIndexChange="handleIndexChange" @handleSelectionChange="handleSelectionChange" :options="options"
+             :pagination="pagination"
              :columns="columns" :operates="operates" @handleFilter="handleFilter" @handelAction="handelAction">
     </i-table>
     <!--endregion-->
@@ -42,7 +43,6 @@
           date: '',
           phone: ''
         },
-        filterList: [],
         collapseTitle: '筛选条件：',
         columns: [
           {
@@ -109,7 +109,7 @@
               show: true,
               icon: 'el-icon-edit',
               plain: true,
-              disabled: true,
+              disabled: false,
               method: (index, row) => {
                 this.handleEdit(index, row)
               }
@@ -127,15 +127,15 @@
             }
           ]
         }, // 操作按钮组
-        page: 1,
-        limit: 20,
+        pagination: {
+          pageIndex: 1,
+          pageSize: 20
+        }, // 分页参数
         options: {
           stripe: true, // 是否为斑马纹 table
           loading: false, // 是否添加表格loading加载动画
           highlightCurrentRow: true, // 是否支持当前行高亮显示
-          mutiSelect: true, // 是否支持列表项选中功能
-          filter: false, // 是否支持数据过滤功能
-          action: false // 是否支持 表格操作功能
+          mutiSelect: true // 是否支持列表项选中功能
         } // table 的参数
       }
     },
@@ -147,14 +147,13 @@
     },
     methods: {
       // 切换每页显示的数量
-      handleSizeChange (size) {
-        this.limit = size
+      handleSizeChange (pagination) {
+        this.pagination = pagination
         this.BLL.getList()
       },
       // 切换页码
-      handleIndexChange (index) {
-        this.page = index
-        console.log(' this.page:', this.page)
+      handleIndexChange (pagination) {
+        this.pagination = pagination
         this.BLL.getList()
       },
       // 选中行
@@ -165,6 +164,7 @@
       handleEdit (index, row) {
         console.log(' index:', index)
         console.log(' row:', row)
+        this.BLL.getList()
       },
       // 删除
       handleDel (index, row) {
@@ -174,8 +174,7 @@
       // 刷新
       reLoad (form) {
         this.$refs[form].resetFields()
-        this.filter.phone = ''
-        this.filter.date = ''
+        this.filter = {date: '', phone: ''}
         this.BLL.getList()
       },
       // 筛选数据

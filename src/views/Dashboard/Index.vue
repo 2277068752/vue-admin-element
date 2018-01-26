@@ -46,12 +46,11 @@
   </div>
 </template>
 <script>
-  import CountTo from 'vue-count-to'
-  import LineChart from '../../components/Charts/LineChart'
-  import RaddarChart from '../../components/Charts/RaddarChart'
-  import PieChart from '../../components/Charts/PieChart'
-  import BarChart from '../../components/Charts/BarChart'
-
+  const LineChart = () => import('../../components/Charts/LineChart')
+  const RaddarChart = () => import('../../components/Charts/RaddarChart')
+  const PieChart = () => import('../../components/Charts/PieChart')
+  const BarChart = () => import('../../components/Charts/BarChart')
+  const CountTo = () => import('vue-count-to')
   const lineChartData = {
     newVisitis: {
       expectedData: [100, 120, 161, 134, 105, 160, 165],

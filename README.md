@@ -1,21 +1,23 @@
-# vue-element-admin
+###1、按需异步加载模块
 
-> a admin project of vue and element
+把
 
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
+```
+import Foo from './Foo.vue'
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+改为如下写法:
+
+```
+const Foo = () => import('./Foo.vue')
+```
+
+
+###2、引入analyzer分析报告
+
+在 **package.json** 中添加
+```
+"analyz": "set npm_config_report=true&&node build/build.js"
+```
+
+然后执行

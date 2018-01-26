@@ -19,7 +19,7 @@ module.exports = {
     showEslintErrorsInOverlay: true,
     devtool: 'cheap-module-eval-source-map',
     cacheBusting: true,
-    cssSourceMap: true,
+    cssSourceMap: true
   },
 
   build: {
@@ -28,10 +28,10 @@ module.exports = {
     index: path.resolve(__dirname, '../dist/index.html'),
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
-    productionSourceMap: true,
+    assetsPublicPath: '/admin/',
+    productionSourceMap: false,
     devtool: '#source-map',
-    productionGzip: false,
+    productionGzip: true,
     productionGzipExtensions: ['js', 'css'],
     bundleAnalyzerReport: process.env.npm_config_report
   }

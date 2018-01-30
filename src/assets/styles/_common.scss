@@ -1,6 +1,6 @@
 @import "./mixins";
 @import "./iconfonts";
-@import "./_fonts";
+@import "./_font";
 
 body {
   height: 100%;
@@ -12,7 +12,7 @@ body {
   overflow-x: hidden;
   overflow-y: hidden;
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
-  font-size: @font-size-l;
+  font-size: $font-size-l;
 }
 
 label {
@@ -20,7 +20,7 @@ label {
 }
 
 html {
-  .scrollBar();
+  @include scrollBar();
   height: 100%;
   box-sizing: border-box;
 }

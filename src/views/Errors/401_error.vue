@@ -41,7 +41,7 @@
   }
 </script>
 
-<style lang="less" rel="stylesheet/less" scoped>
+<style lang="scss" scoped>
   .error-page {
     width: 800px;
     margin: 100px auto;

@@ -203,6 +203,6 @@
   }
 </script>
 
-<style lang="less" rel="stylesheet/less">
+<style lang="scss">
   @import "./Index";
 </style>

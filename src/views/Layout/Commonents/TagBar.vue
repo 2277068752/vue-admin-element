@@ -143,8 +143,8 @@
   }
 </script>
 
-<style lang="less" rel="stylesheet/less" scoped>
-  @import "../../../assets/styles/_fonts";
+<style lang="scss" scoped>
+  @import "../../../assets/styles/_font";
 
   .tag-bar {
     border-bottom: solid 1px #e6e6e6;
@@ -164,7 +164,7 @@
         margin-right: 12px;
         border-radius: 2px;
         color: #495060;
-        font-size: @font-size-s;
+        font-size: $font-size-s;
         a {
           padding-right: 12px;
         }

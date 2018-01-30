@@ -10,27 +10,27 @@
   </div>
 </template>
 <script>
-  export default {
-    components: {},
-    data () {
-      return {}
-    },
-    mounted () {},
-    computed: {
-      height () {
-        return this.$utils.Common.getWidthHeight().height - 88 + 'px'
-      }
-    },
-    methods: {}
-  }
+export default {
+  components: {},
+  data () {
+    return {}
+  },
+  mounted () { },
+  computed: {
+    height () {
+      return this.$utils.Common.getWidthHeight().height - 88 + 'px'
+    }
+  },
+  methods: {}
+}
 </script>
 
-<style lang="less" rel="stylesheet/less" scoped>
-  @import "../../../assets/styles/mixins";
+<style lang="scss" scoped>
+@import "../../../assets/styles/mixins";
 
-  .main {
-    height: 100%;
-    overflow-y: auto;
-    .scrollBar()
-  }
+.main {
+  height: 100%;
+  overflow-y: auto;
+  @include scrollBar();
+}
 </style>

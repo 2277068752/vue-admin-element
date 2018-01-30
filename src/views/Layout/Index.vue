@@ -29,7 +29,7 @@
   }
 </script>
 
-<style lang="less" rel="stylesheet/less" scoped>
+<style lang="scss" scoped>
   @import "../../assets/styles/variable";
 
   .layout-page {
@@ -38,7 +38,7 @@
     position: relative;
     .sidebar-container {
       transition: width 0.28s;
-      width: @side-bar-width;
+      width: $side-bar-width;
       position: fixed;
       z-index: 1001;
       left: 0;
@@ -47,7 +47,7 @@
     .main-container {
       width: 100%;
       min-height: 100%;
-      padding-left: @side-bar-width;
+      padding-left: $side-bar-width;
     }
   }
 </style>

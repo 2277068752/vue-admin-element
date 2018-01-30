@@ -20,7 +20,7 @@
       <div class="userInfo-container">
         <el-dropdown>
           <div class="el-dropdown-img">
-            <img src="../../../assets/images/user.gif"/>
+            <img src="../../../assets/images/user.gif" />
             <i class="el-icon-caret-bottom"></i>
           </div>
           <el-dropdown-menu slot="dropdown">
@@ -38,108 +38,108 @@
   </div>
 </template>
 <script>
-  import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
-  const layout = 'layout'
-  const dashboard = 'dashboard'
-  export default {
-    components: {},
-    data () {
-      return {
-        levelList: [] // 面包屑导航的数据
-      }
-    },
-    mounted () {
+const layout = 'layout'
+const dashboard = 'dashboard'
+export default {
+  components: {},
+  data () {
+    return {
+      levelList: [] // 面包屑导航的数据
+    }
+  },
+  mounted () {
+    this.getlevelData()
+  },
+  computed: {
+    ...mapGetters([
+      'sidebar'
+    ])
+  },
+  watch: {
+    $route () {
       this.getlevelData()
+    }
+  },
+  methods: {
+    // 侧边栏折叠
+    showHideSideBar () {
+      let temp = this.sidebar.open === 0
+      this.$store.dispatch('set_sidebar_toggle', temp)
     },
-    computed: {
-      ...mapGetters([
-        'sidebar'
-      ])
+    getlevelData () {
+      let matched = this.$route.matched.filter(_x => _x.path !== `/${layout}` && _x.path !== `/${dashboard}`)
+      this.levelList = [{ path: `/${dashboard}`, name: '首页' }].concat(matched)
     },
-    watch: {
-      $route () {
-        this.getlevelData()
-      }
-    },
-    methods: {
-      // 侧边栏折叠
-      showHideSideBar () {
-        let temp = this.sidebar.open === 0
-        this.$store.dispatch('set_sidebar_toggle', temp)
-      },
-      getlevelData () {
-        let matched = this.$route.matched.filter(_x => _x.path !== `/${layout}` && _x.path !== `/${dashboard}`)
-        this.levelList = [{path: `/${dashboard}`, name: '首页'}].concat(matched)
-      },
-      // 退出登录
-      loginOut () {
-        this.$confirm('将要退出当前账号，是否继续？', '提示', {
-          confirmButtonText: '退出登录',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          this.$store.commit('service_init')
-          this.$router.push({path: '/login'})
-        })
-      }
+    // 退出登录
+    loginOut () {
+      this.$confirm('将要退出当前账号，是否继续？', '提示', {
+        confirmButtonText: '退出登录',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$store.commit('service_init')
+        this.$router.push({ path: '/login' })
+      })
     }
   }
+}
 </script>
 
-<style lang="less" rel="stylesheet/less">
-  @import "../../../assets/styles/_fonts";
+<style lang="scss">
+@import "../../../assets/styles/_font";
 
-  .nav-bar {
-    @height: 50px;
-    height: @height;
-    line-height: @height;
-    padding: 0 12px;
-    .show-hide-sidebar-container {
+.nav-bar {
+  $height: 50px;
+  height: $height;
+  line-height: $height;
+  padding: 0 12px;
+  .show-hide-sidebar-container {
+    display: inline-block;
+    .axon-icon {
       display: inline-block;
-      .axon-icon {
-        display: inline-block;
-        font-size: @font-size-xxl;
-        &.hide {
-          transform-origin: 50% 50%;
-          transform: rotate(90deg);
-          transition: 0.38s;
-        }
-        &.show {
-          transform-origin: 50% 50%;
-          transition: 0.38s;
-        }
+      font-size: $font-size-xxl;
+      &.hide {
+        transform-origin: 50% 50%;
+        transform: rotate(90deg);
+        transition: 0.38s;
+      }
+      &.show {
+        transform-origin: 50% 50%;
+        transition: 0.38s;
       }
     }
-    .breadcrumb-container {
-      display: inline-block;
-      font-size: 14px;
-      margin-left: 10px;
-      .el-breadcrumb__item {
-        .el-breadcrumb__inner {
+  }
+  .breadcrumb-container {
+    display: inline-block;
+    font-size: 14px;
+    margin-left: 10px;
+    .el-breadcrumb__item {
+      .el-breadcrumb__inner {
+        font-weight: 400 !important;
+        color: #97a8be !important;
+        a {
           font-weight: 400 !important;
-          color: #97a8be !important;
-          a {
-            font-weight: 400 !important;
-          }
-        }
-      }
-    }
-    .userInfo-container {
-      display: inline-block;
-      height: @height;
-      float: right;
-      right: 0;
-      .el-dropdown {
-        .el-dropdown-img {
-          height: @height;
-          img {
-            vertical-align: middle;
-            border-radius: 6px;
-            width: 40px;
-          }
         }
       }
     }
   }
+  .userInfo-container {
+    display: inline-block;
+    height: $height;
+    float: right;
+    right: 0;
+    .el-dropdown {
+      .el-dropdown-img {
+        height: $height;
+        img {
+          vertical-align: middle;
+          border-radius: 6px;
+          width: 40px;
+        }
+      }
+    }
+  }
+}
 </style>

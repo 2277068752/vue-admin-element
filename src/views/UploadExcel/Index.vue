@@ -30,7 +30,5 @@
   }
 </script>
 
-<style lang="less" rel="stylesheet/less" scoped>
-  .upload-excel-page {
-  }
+<style lang="scss" scoped>
 </style>

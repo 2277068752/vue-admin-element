@@ -54,6 +54,6 @@ export default {
 }
 </script>
 
-<style lang="less" rel="stylesheet/less">
-@import "./Index";
+<style lang="scss">
+@import "./Index.scss";
 </style>

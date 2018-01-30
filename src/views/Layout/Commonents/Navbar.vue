@@ -126,7 +126,6 @@ export default {
     }
   }
   .userInfo-container {
-    display: inline-block;
     height: $height;
     float: right;
     right: 0;

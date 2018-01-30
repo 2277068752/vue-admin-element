@@ -5,12 +5,12 @@
     /*水平滚动条的样式*/
     width: 5px;
     background-color: #CCCCCC;
-    -webkit-border-radius: 6px;
+    border-radius: 6px;
   }
    ::-webkit-scrollbar-track-piece {
     background-color: #fff;
     /*滚动条的背景颜色*/
-    -webkit-border-radius: 0;
+    border-radius: 0;
     /*滚动条的圆角宽度*/
   }
    ::-webkit-scrollbar {
@@ -23,7 +23,7 @@
     /*垂直滚动条的样式*/
     height: 50px;
     background-color: #999;
-    -webkit-border-radius: 4px;
+    border-radius: 4px;
     outline: 2px solid #fff;
     outline-offset: -2px;
     border: 2px solid #fff;
@@ -32,6 +32,6 @@
     /*滚动条的hover样式*/
     height: 50px;
     background-color: #9f9f9f;
-    -webkit-border-radius: 4px;
+    border-radius: 4px;
   }
 }

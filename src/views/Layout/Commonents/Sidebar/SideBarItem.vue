@@ -2,8 +2,7 @@
   <div class="slide-bar-item">
     <!--判断menu级别-->
     <template v-for="(item, index) in routes">
-      <el-menu-item v-if="!item.children" :index="item.link" :class="{'submenu-title-noDropdown':!isNest}"
-                    @click.native="sideBarPath(item)">
+      <el-menu-item v-if="!item.children" :index="item.link" :class="{'submenu-title-noDropdown':!isNest}" @click.native="sideBarPath(item)">
         <template slot="title">
           <span class="axon-icon" v-html="item.icon"></span>
           <span>{{ item.name }}</span>
@@ -28,56 +27,57 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'SidebarItem',
-    props: {
-      routes: {
-        type: Array,
-        default: []
-      },
-      isNest: {
-        type: Boolean,
-        default: false
-      }
+export default {
+  name: 'SidebarItem',
+  props: {
+    routes: {
+      type: Array,
+      default: []
     },
-    data () {
-      return {}
-    },
-    mounted () {},
-    computed: {},
-    methods: {
-      // 路由跳转
-      sideBarPath (item) {
-        console.log(' item:', item)
-        this.$router.push({path: item.link})
-      }
+    isNest: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data () {
+    return {}
+  },
+  mounted () { },
+  computed: {},
+  methods: {
+    // 路由跳转
+    sideBarPath (item) {
+      console.log(' item:', item)
+      this.$router.push({ path: item.link })
     }
   }
+}
 </script>
 
 <style lang="scss">
-  .slide-bar-item {
-    height: 100%;
-    width: 100%;
-    .el-menu {
-      border: 0;
-      $baColor: #1f2d3d;
+@import "../../../../assets/styles/_variable.scss";
+@import "../../../../assets/styles/_font.scss";
+.slide-bar-item {
+  height: 100%;
+  width: 100%;
+  .el-menu {
+    border: 0;
+    .el-menu-item {
+      background-color: $bg-active-color !important;
+    }
+    .nest-menu {
+      .el-submenu__title {
+        background-color: $bg-active-color !important;
+      }
       .el-menu-item {
-        background-color: $baColor !important;
-      }
-      .nest-menu {
-        .el-submenu__title {
-          background-color: $baColor !important;
-        }
-        .el-menu-item {
-          background-color: $baColor !important;
-        }
-      }
-      span.axon-icon {
-        color: rgb(191, 203, 217);
-        font-size: 16px;
-        margin-right: 16px;
+        background-color: $bg-active-color !important;
       }
     }
+    span.axon-icon {
+      color: $font-color;
+      font-size: $font-size-xl;
+      margin-right: 16px;
+    }
   }
+}
 </style>

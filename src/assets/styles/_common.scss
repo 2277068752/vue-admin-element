@@ -1,6 +1,7 @@
 @import "./mixins";
 @import "./iconfonts";
 @import "./_font";
+@import "./_variable";
 
 body {
   height: 100%;
@@ -16,7 +17,7 @@ body {
 }
 
 label {
-  font-weight: 500;
+  font-weight: $main-font-weight;
 }
 
 html {

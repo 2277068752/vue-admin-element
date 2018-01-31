@@ -12,7 +12,7 @@
             </div>
             <div class="card-panel-description">
               <div class="card-panel-text">{{ panel.label }}</div>
-              <count-to class="card-panel-num" :startVal="0" :endVal="panel.value" :duration="2600"></count-to>
+              <count-to class="card-panel-num" :startVal="0" :endVal="panel.value" :decimals=2 :duration="2600"></count-to>
             </div>
           </div>
         </el-col>
@@ -91,14 +91,14 @@ export default {
         {
           id: 'purchases',
           label: 'Demo3',
-          value: 9280,
+          value: 9280.3,
           icon: '&#xe736;',
           color: 3 // '#f4516c'
         },
         {
           id: 'shoppings',
           label: 'Demo4',
-          value: 13600,
+          value: 13600.6,
           icon: '&#xe61b;',
           color: 4 // '#34bfa3'
         }

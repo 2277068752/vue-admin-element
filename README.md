@@ -19,5 +19,8 @@ const Foo = () => import('./Foo.vue')
 ```
 "analyz": "set npm_config_report=true&&node build/build.js"
 ```
-
+###3、将vscode设置同步到Github的gist
+```
+6d2da5bba7740a7501bedbe27b174cdb2d383317
+```
 然后执行

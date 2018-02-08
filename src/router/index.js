@@ -45,6 +45,14 @@ export default {
         path: '/error/401',
         name: '401',
         component: _import('Errors/401_error')
+      }, {
+        path: '*',
+        name: '404',
+        component: _import('Errors/404_error')
+      }, {
+        path: '/role/list',
+        name: '用户角色',
+        component: _import('Roles/Index')
       }]
     }
   ]

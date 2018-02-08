@@ -18,6 +18,7 @@ import UtilsPlugin from './utils/index'
 import AlertPlugin from './plugs/Alert'
 // http
 import HttpPlugin from './http/index'
+import { Tag } from '../src/model/index'
 // mock
 import './mock'
 
@@ -43,10 +44,9 @@ const router = new VueRouter({
 })
 const dispatch = store.dispatch
 router.beforeEach((to, from, next) => {
-  // loadingInstance = Loading.service({text: '加载中…', background: 'rgba(0, 0, 0, 0.7)', lock: true})
+  let havePath = false
   if (to.path !== '/' && to.path !== '/login' && to.path !== '/error/404' && to.path !== '/error/401') {
-    let havePath = false
-    // 先判断当前访问的路由是否在roter.js中
+    // 第一步：判断当前访问的路由是否在roter.js中
     let children = Routers.routes.find(_x => _x.path === '/layout').children // 所有的子栏目都是在 layout框架内部
     if (!children) {
       havePath = false
@@ -57,7 +57,9 @@ router.beforeEach((to, from, next) => {
     if (!havePath) {
       next('/error/404')
     } else {
-      dispatch('add_tagbar', {name: to.name, path: to.path})
+      // let current_path =
+      let tag = new Tag({ id: to.path, path: to.path, name: to.name })
+      dispatch('add_tagbar', tag)
       next()
     }
   } else {

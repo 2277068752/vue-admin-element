@@ -2,7 +2,6 @@
 @import "./iconfonts";
 @import "./_font";
 @import "./_variable";
-
 body {
   height: 100%;
   -moz-osx-font-smoothing: grayscale;
@@ -69,4 +68,10 @@ div:focus {
 
 .clearfix:after {
   clear: both
+}
+
+.el-dropdown-menu {
+  .el-dropdown-menu__item {
+    line-height: 40px;
+  }
 }

@@ -32,6 +32,7 @@
           {
             "icon": "",
             "name": "分页表格",
+            "action": "add,upload,download,reload",
             "link": "/table/list",
             "sort": 321
           }

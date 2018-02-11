@@ -1,10 +1,13 @@
 import { deepCopy } from '../../utils/modules/utils'
-
+import { Button } from '../../model/index'
 const state = {
   sidebar: {
     list: [], // 数据集合
     open: 1 // 1：展开 0：折叠
   },
+  button: {
+    list: []
+  }, // 操作按钮
   tagbar: {
     list: []
   } // tab标签导航
@@ -16,6 +19,9 @@ const getters = {
   },
   tagbar: state => {
     return state.tagbar
+  },
+  button: state => {
+    return state.button
   }
 }
 const mutations = {
@@ -42,15 +48,23 @@ const mutations = {
   // 清空tag标签
   EMPTY_TAG_LIST (state) {
     state.tagbar.list.length = 0 // 清空数组最好的方法
+  },
+  // 赋按钮权限
+  SET_BUTTON_ACTION (state, val) {
+    state.button.list = val
+  },
+  // 删除按钮权限
+  EMPTY_BUTTON (state) {
+    state.button.list.length = 0
   }
 }
 const actions = {
   // 展开/折叠菜单栏
-  set_sidebar_toggle ({commit}, val) {
+  set_sidebar_toggle ({ commit }, val) {
     commit('SET_SIDEBAR_TOGGLE', val)
   },
   // 登录成功之后，取用户的权限信息
-  init_sidebar_data ({commit}, val) {
+  init_sidebar_data ({ commit }, val) {
     try {
       commit('INIT_SIDEBAR_DATA', val)
     } catch (e) {
@@ -58,7 +72,7 @@ const actions = {
     }
   },
   // 追加tag标签
-  add_tagbar ({commit, state}, val) {
+  add_tagbar ({ commit, state }, val) {
     try {
       if (state.tagbar.list.length <= 0) {
         commit('ADD_TAGBAR_LIST', val)
@@ -73,7 +87,7 @@ const actions = {
     }
   },
   // 删除 当前tag标签
-  del_tagbar_item ({commit, state}, val) {
+  del_tagbar_item ({ commit, state }, val) {
     try {
       // 判断列表中是否存在当前tag标签
       for (let [_i, _x] of state.tagbar.list.entries()) {
@@ -86,7 +100,7 @@ const actions = {
     }
   },
   // 删除其他的tag标签
-  del_other_tags ({commit, state}, val) {
+  del_other_tags ({ commit, state }, val) {
     return new Promise((resolve) => {
       // 清除所有的标签，只保留当前标签
       commit('EMPTY_TAG_LIST')
@@ -95,14 +109,53 @@ const actions = {
     })
   },
   // 清空tag标签
-  del_all_tags ({commit}) {
+  del_all_tags ({ commit }) {
     return new Promise((resolve) => {
       // 清空tag集合，只保留首页
-      let index = {name: '首页', path: '/dashboard'}
+      let index = { name: '首页', path: '/dashboard' }
       commit('EMPTY_TAG_LIST')
       commit('ADD_TAGBAR_LIST', index)
       resolve(index)
     })
+  },
+  // 赋按钮权限
+  set_button_action ({ commit }, val) {
+    if (val) {
+      let valArr = val.split(',')
+      let buttonArr = []
+      // 将btn处理成 element 的识别格式
+      for (let i = 0; i < valArr.length; i++) {
+        let button = new Button({ key: valArr[i] }) // eslint-disable-line
+        switch (valArr[i]) {
+          case 'add':
+            button.name = '新增'
+            button.type = 'warning'
+            button.icon = 'el-icon-plus'
+            break
+          case 'upload':
+            button.name = '上传'
+            button.type = 'primary'
+            button.icon = 'el-icon-upload2'
+            break
+          case 'download':
+            button.name = '下载'
+            button.type = 'primary'
+            button.icon = 'el-icon-download'
+            break
+          case 'reload':
+            button.name = '刷新'
+            button.type = 'primary'
+            button.icon = 'el-icon-sort'
+            break
+        }
+        buttonArr.push(button)
+      }
+      commit('SET_BUTTON_ACTION', buttonArr)
+    }
+  },
+  // 删除按钮权限
+  empty_button ({ commit }) {
+    commit('EMPTY_BUTTON')
   }
 }
 export default {

@@ -18,7 +18,7 @@
       <!--endregion-->
       <!--region 用户信息-->
       <div class="userInfo-container">
-        <el-dropdown>
+        <el-dropdown trigger="click">
           <div class="el-dropdown-img">
             <img src="../../../assets/images/user.gif" />
             <i class="el-icon-caret-bottom"></i>

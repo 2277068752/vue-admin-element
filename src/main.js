@@ -44,8 +44,8 @@ const router = new VueRouter({
 })
 const dispatch = store.dispatch
 router.beforeEach((to, from, next) => {
-  let havePath = false
   if (to.path !== '/' && to.path !== '/login' && to.path !== '/error/404' && to.path !== '/error/401') {
+    let havePath = false
     // 第一步：判断当前访问的路由是否在roter.js中
     let children = Routers.routes.find(_x => _x.path === '/layout').children // 所有的子栏目都是在 layout框架内部
     if (!children) {
@@ -60,12 +60,29 @@ router.beforeEach((to, from, next) => {
       // let current_path =
       let tag = new Tag({ id: to.path, path: to.path, name: to.name })
       dispatch('add_tagbar', tag)
+      // 每次都清空按钮操作缓存
+      dispatch('empty_button')
+      let limit = store.state.global.sidebar.list
+      filterActionBtns(limit, to)
       next()
     }
   } else {
     next()
   }
 })
+// 取当前路由中的操作按钮权限
+let filterActionBtns = (limit, to) => {
+  for (let i = 0; i < limit.length; i++) {
+    if (!limit[i].children) {
+      if (limit[i].action && limit[i].link === to.path) {
+          // 将当前路由下的按钮权限塞入vuex
+        dispatch('set_button_action', limit[i].action)
+      }
+    } else {
+      filterActionBtns(limit[i].children, to)
+    }
+  }
+}
 // 注册一个全局的after的钩子，不会改变导航
 router.afterEach((to) => {
 })

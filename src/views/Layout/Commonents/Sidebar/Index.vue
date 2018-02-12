@@ -46,7 +46,7 @@
     span.axon-icon {
       color: rgb(191, 203, 217);
       font-size: 16px;
-      margin-right: 16px;
+      margin-right: 4px;
     }
   }
 </style>

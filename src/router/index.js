@@ -53,6 +53,10 @@ export default {
         path: '/role/list',
         name: '用户角色',
         component: _import('Roles/Index')
+      }, {
+        path: '/menus/list',
+        name: '菜单设置',
+        component: _import('Menus/Index')
       }]
     }
   ]

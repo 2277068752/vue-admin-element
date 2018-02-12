@@ -3,30 +3,35 @@
     "icon": "&#xe63d;",
     "name": "首页",
     "link": "/dashboard",
+    "state": 1,
     "sort": 1
   },
   {
-    "icon": "&#xe626;",
+    "icon": "&#xe611;",
     "name": "图标",
     "link": "/icons",
+    "state": 1,
     "sort": 2
   },
   {
     "icon": "&#xe626;",
     "name": "组件",
-    "link": "/components",
+    "link": "",
+    "state": 1,
     "sort": 3,
     "children": [
       {
         "icon": "",
         "name": "富文本编辑器",
         "link": "/tinyMce",
+        "state": 0,
         "sort": 31
       },
       {
-        "icon": "&#xe626;",
+        "icon": "&#xe600;",
         "name": "表格",
         "link": "",
+        "state": 1,
         "sort": 32,
         "children": [
           {
@@ -34,20 +39,23 @@
             "name": "分页表格",
             "action": "add,upload,download,reload",
             "link": "/table/list",
+            "state": 1,
             "sort": 321
           }
         ]
       },
       {
-        "icon": "&#xe626;",
+        "icon": "&#xe671;",
         "name": "上传",
         "link": "",
+        "state": 1,
         "sort": 33,
         "children": [
           {
             "icon": "",
             "name": "Excel上传",
             "link": "/upload/excel",
+            "state": 1,
             "sort": 331
           }
         ]
@@ -55,22 +63,49 @@
     ]
   },
   {
-    "icon": "&#xe626;",
+    "icon": "&#xe68d;",
     "name": "错误页面",
-    "link": "/error",
+    "link": "",
+    "state": 1,
     "sort": 4,
     "children": [
       {
         "icon": "",
         "name": "404",
         "link": "/error/404",
+        "state": 1,
         "sort": 41
       },
       {
         "icon": "",
         "name": "401",
         "link": "/error/401",
+        "state": 1,
         "sort": 42
+      }
+    ]
+  },
+  {
+    "icon": "&#xe683;",
+    "name": "系统设置",
+    "link": "",
+    "state": 1,
+    "sort": 5,
+    "children": [
+      {
+        "icon": "",
+        "name": "菜单设置",
+        "action": "add",
+        "link": "/menus/list",
+        "state": 1,
+        "sort": 51
+      },
+      {
+        "icon": "",
+        "name": "角色管理",
+        "link": "/roles/list",
+        "state": 1,
+        "sort": 52
       }
     ]
   }

@@ -76,7 +76,7 @@ export default {
     span.axon-icon {
       color: $font-color;
       font-size: $font-size-xl;
-      margin-right: 16px;
+      margin-right: 4px;
     }
   }
 }

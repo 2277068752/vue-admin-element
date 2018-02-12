@@ -197,12 +197,5 @@ export default {
       return ''
     }
     return moment(date).format(type)
-  },
-  /**
-   * 转换 string 方法名为 Function 对象
-   * @param {*} fn 方法名
-   */
-  callback (fn) {
-    return eval(`this.${fn}()`) // eslint-disable-line
   }
 }

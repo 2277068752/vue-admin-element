@@ -12,7 +12,7 @@
           </el-form-item>
           <el-form-item>
             <template v-if="button" v-for="btn in button.list">
-              <el-button :type="btn.type" :icon="btn.icon" @click="$utils.Common.callback(btn.key)">{{ btn.name }}</el-button>
+              <el-button :type="btn.type" :icon="btn.icon" @click="callback(btn.key)">{{ btn.name }}</el-button>
             </template>
           </el-form-item>
         </el-form>
@@ -64,10 +64,11 @@ export default {
           label: '状态',
           align: 'center',
           width: '160',
-          render: (h, params) => {
-            return h('el-tag', {
-              props: { type: params.row.state === 0 ? 'success' : params.row.state === 1 ? 'info' : 'danger' } // 组件的props
-            }, params.row.state === 0 ? '上架' : params.row.state === 1 ? '下架' : '审核中')
+          render: (row, column) => {
+            return row.state === 0 ? <el-tag type="success">上架</el-tag> : row.state === 1 ? <el-tag type="info">下架</el-tag> : <el-tag type="danger">审核中</el-tag>
+            // return h('el-tag', {
+            //   props: { type: params.row.state === 0 ? 'success' : params.row.state === 1 ? 'info' : 'danger' } // 组件的props
+            // }, params.row.state === 0 ? '上架' : params.row.state === 1 ? '下架' : '审核中')
           }
         },
         {
@@ -204,6 +205,10 @@ export default {
           return v[j]
         }
       }))
+    },
+    // 转换 string 方法名为 Function 对象
+    callback (fn) {
+      return eval(`this.${fn}()`) // eslint-disable-line
     }
   }
 }

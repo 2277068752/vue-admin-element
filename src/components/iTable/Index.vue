@@ -1,14 +1,14 @@
 <!--region 封装的分页 table-->
 <template>
   <div class="table">
-    <el-table id="iTable" v-loading.iTable="options.loading" :data="list" :max-height="height" :stripe="options.stripe" ref="mutipleTable" @selection-change="handleSelectionChange">
+    <el-table id="iTable" v-loading.iTable="options.loading" :data="list" :max-height="height" border :stripe="options.stripe" ref="mutipleTable" @selection-change="handleSelectionChange">
       <!--region 选择框-->
       <el-table-column v-if="options.mutiSelect" type="selection" style="width: 55px;">
       </el-table-column>
       <!--endregion-->
       <!--region 数据列-->
       <template v-for="(column, index) in columns">
-        <el-table-column :prop="column.prop" :label="column.label" :align="column.align" :width="column.width">
+        <el-table-column :prop="column.prop" :label="column.label" :align="column.align" :width="column.width" :class-name="column.className">
           <template slot-scope="scope">
             <template v-if="!column.render">
               <template v-if="column.formatter">
@@ -19,7 +19,7 @@
               </template>
             </template>
             <template v-else>
-              <expand-dom :column="column" :row="scope.row" :render="column.render" :index="index"></expand-dom>
+              <expand-dom :column="column" :row="scope.row"></expand-dom>
             </template>
           </template>
         </el-table-column>
@@ -57,7 +57,7 @@ export default {
     }, // 数据列表
     columns: {
       type: Array,
-      default: [] // 需要展示的列 === prop：列数据对应的属性，label：列名，align：对齐方式，width：列宽
+      default: [] // 需要展示的列 === prop：列数据对应的属性，label：列名，align：对齐方式，width：列宽，className: 当前列的class
     },
     operates: {
       type: Object,
@@ -87,23 +87,34 @@ export default {
   },
   components: {
     expandDom: {
-      functional: true,
+      /* functional: true,
+       props: {
+         row: Object,
+         render: Function,
+         index: Number,
+         column: {
+           type: Object,
+           default: null
+         }
+       },
+       render: (h, ctx) => {
+         const params = {
+           row: ctx.props.row,
+           index: ctx.props.index
+         }
+         if (ctx.props.column) params.column = ctx.props.column
+         return ctx.props.render(h, params)
+       } */
       props: {
-        row: Object,
-        render: Function,
-        index: Number,
         column: {
-          type: Object,
-          default: null
+          required: true
+        },
+        row: {
+          required: true
         }
       },
-      render: (h, ctx) => {
-        const params = {
-          row: ctx.props.row,
-          index: ctx.props.index
-        }
-        if (ctx.props.column) params.column = ctx.props.column
-        return ctx.props.render(h, params)
+      render (h) {
+        return h('div', {}, ([this.column.render(this.row, this.column)]))
       }
     }
   },
@@ -168,6 +179,8 @@ export default {
 <style lang="scss">
 .table {
   height: 100%;
+  width: calc(#{"100% - 20px"});
+  margin: 0 auto;
   .el-pagination {
     float: right;
     margin: 20px;
@@ -223,6 +236,11 @@ export default {
     border-bottom-left-radius: 6px;
     border-top-left-radius: 6px;
     cursor: pointer;
+  }
+  .el-table--medium {
+    td {
+      padding: 2px !important;
+    }
   }
 }
 </style>

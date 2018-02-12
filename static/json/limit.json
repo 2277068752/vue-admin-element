@@ -37,7 +37,7 @@
           {
             "icon": "",
             "name": "分页表格",
-            "action": "add,upload,download,reload",
+            "action": "add,upload,reload",
             "link": "/table/list",
             "state": 1,
             "sort": 321
@@ -103,7 +103,7 @@
       {
         "icon": "",
         "name": "角色管理",
-        "link": "/roles/list",
+        "link": "/role/list",
         "state": 1,
         "sort": 52
       }

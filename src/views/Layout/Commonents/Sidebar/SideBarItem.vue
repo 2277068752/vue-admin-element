@@ -47,7 +47,6 @@ export default {
   methods: {
     // 路由跳转
     sideBarPath (item) {
-      console.log(' item:', item)
       this.$router.push({ path: item.link })
     }
   }

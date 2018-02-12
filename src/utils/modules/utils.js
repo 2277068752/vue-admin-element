@@ -1,3 +1,4 @@
+
 /**
  * Get the first item that pass the test
  * by second argument function

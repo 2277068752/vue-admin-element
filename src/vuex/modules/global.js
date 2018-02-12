@@ -1,5 +1,5 @@
 import { deepCopy } from '../../utils/modules/utils'
-import { Button } from '../../model/index'
+import { formatButton } from '../../model/modules/Button'
 const state = {
   sidebar: {
     list: [], // 数据集合
@@ -122,34 +122,7 @@ const actions = {
   set_button_action ({ commit }, val) {
     if (val) {
       let valArr = val.split(',')
-      let buttonArr = []
-      // 将btn处理成 element 的识别格式
-      for (let i = 0; i < valArr.length; i++) {
-        let button = new Button({ key: valArr[i] }) // eslint-disable-line
-        switch (valArr[i]) {
-          case 'add':
-            button.name = '新增'
-            button.type = 'warning'
-            button.icon = 'el-icon-plus'
-            break
-          case 'upload':
-            button.name = '上传'
-            button.type = 'primary'
-            button.icon = 'el-icon-upload2'
-            break
-          case 'download':
-            button.name = '下载'
-            button.type = 'primary'
-            button.icon = 'el-icon-download'
-            break
-          case 'reload':
-            button.name = '刷新'
-            button.type = 'primary'
-            button.icon = 'el-icon-sort'
-            break
-        }
-        buttonArr.push(button)
-      }
+      let buttonArr = formatButton(valArr)
       commit('SET_BUTTON_ACTION', buttonArr)
     }
   },

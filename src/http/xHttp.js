@@ -1,11 +1,8 @@
 /**
  * Created by chang on 2017/8/2.
  */
-import axios from 'axios'
+import xAxios from './xAxios'
 import config from '../../config/index'
-import Vue from 'vue'
-
-let loading = null
 
 /**
  * 成功处理
@@ -13,9 +10,6 @@ let loading = null
  * @param load
  */
 function successParse (res, load) {
-  if (load) {
-    loading.close()
-  }
   try {
     return JSON.parse(res.data)
   } catch (ex) {
@@ -29,23 +23,20 @@ function successParse (res, load) {
  * @param load
  * @returns {Promise.<*>|Promise<R>}
  */
-function errorParse (ex, load) {
-  if (load) {
-    loading.close()
-  }
+function errorParse (ex) {
   switch (ex.status) {
     case 401:
       // 权限过期
-      return Promise.reject({code: ex.status, msg: '您的权限已过期，请重新登录！'}) // eslint-disable-line
+      return Promise.reject({ code: ex.status, msg: '您的权限已过期，请重新登录！' }) // eslint-disable-line
     case 400:
       // 请求参数错误
-      return Promise.reject({code: ex.status, msg: '提交的数据有错误！'}) // eslint-disable-line
+      return Promise.reject({ code: ex.status, msg: '提交的数据有错误！' }) // eslint-disable-line
     case 500:
       // 系统错误
-      return Promise.reject({code: ex.status, msg: '系统报错啦，请联系管理员！'}) // eslint-disable-line
+      return Promise.reject({ code: ex.status, msg: '系统报错啦，请联系管理员！' }) // eslint-disable-line
     default:
       // 其它
-      return Promise.reject({code: ex.status, msg: '网络异常，请稍后再试'}) // eslint-disable-line
+      return Promise.reject({ code: ex.status, msg: '网络异常，请稍后再试' }) // eslint-disable-line
   }
 }
 
@@ -88,34 +79,32 @@ function requestUrl (url) {
  * @returns {Promise<U>|*|Promise|Promise.<T>}
  */
 function send (url, method, body, options, load, loadMsg) {
-  if (load) {
-    loading = Vue.$loading({lock: true, text: loadMsg, spinner: 'el-icon-loading', background: 'rgba(0, 0, 0, 0.7)'})
-  }
   // 生成请求的url
   url = requestUrl(url)
-  const opts = {...options}
+  const opts = { ...options }
   opts.headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
+    'loading': { load, loadMsg },
     ...opts.headers
   }
   switch (method) {
     case 'get':
-      return axios.get(url, opts)
-        .then(res => successParse(res, load))
-        .catch(ex => errorParse(ex.response, load))
+      return xAxios.get(url, opts)
+        .then(res => successParse(res))
+        .catch(ex => errorParse(ex.response))
     case 'post':
-      return axios.post(url, body, opts)
-        .then(res => successParse(res, load))
-        .catch(ex => errorParse(ex.response, load))
+      return xAxios.post(url, body, opts)
+        .then(res => successParse(res))
+        .catch(ex => errorParse(ex.response))
   }
 }
 
 export default {
-  get (url, options, {load = false, loadMsg = '加载中...'} = {}) {
+  get (url, options, { load = false, loadMsg = '加载中...' } = {}) {
     return send(url, 'get', null, options, load, loadMsg)
   },
-  post (url, body, options, {load = false, loadMsg = '加载中...'} = {}) {
+  post (url, body, options, { load = false, loadMsg = '加载中...' } = {}) {
     return send(url, 'post', body, options, load, loadMsg)
   }
 }

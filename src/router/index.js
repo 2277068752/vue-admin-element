@@ -51,12 +51,24 @@ export default {
         component: _import('Errors/404_error')
       }, {
         path: '/role/list',
-        name: '用户角色',
+        name: '角色管理',
         component: _import('Roles/Index')
+      }, {
+        path: '/user/list',
+        name: '用户管理',
+        component: _import('Users/Index')
       }, {
         path: '/menus/list',
         name: '菜单设置',
         component: _import('Menus/Index')
+      }, {
+        path: '/smscode_config/list',
+        name: '短信码',
+        component: _import('SmsCode/Index')
+      }, {
+        path: '/errorcode_orconfig/list',
+        name: '错误码',
+        component: _import('ErrorCode/Index')
       }]
     }
   ]

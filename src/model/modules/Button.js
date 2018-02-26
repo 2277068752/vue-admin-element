@@ -39,6 +39,11 @@ export function formatButton (list) {
         button.type = 'primary'
         button.icon = 'el-icon-sort'
         break
+      case 'query':
+        button.name = '筛选'
+        button.type = 'primary'
+        button.icon = 'el-icon-search'
+        break
     }
     buttonArr.push(button)
   }

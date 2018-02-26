@@ -70,15 +70,6 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
-Vue.prototype.__callback = (fn, _this) => {
-  console.log('this:', _this)
-  fn = _this + '.' + fn
-  console.log(fn)
-  // let Fn = Function
-  // return new Fn('return ' + fn)()
-  return eval(fn) // eslint-disable-line
-}
-console.log(Vue.callback)
 // 取当前路由中的操作按钮权限
 let filterActionBtns = (limit, to) => {
   for (let i = 0; i < limit.length; i++) {

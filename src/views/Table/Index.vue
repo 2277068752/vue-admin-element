@@ -2,7 +2,7 @@
   <div class="table-page">
     <!--region  表格操作-->
     <div class="action-container">
-      <filter-collapse :title="collapseTitle" :filterData="filter" @handleFilter="filterData">
+      <filter-collapse :title="collapseTitle" :filterData="filter">
         <el-form :model="filter" ref="filter" :inline="true">
           <el-form-item prop="phone" label="联系方式" label-width="80px">
             <el-input v-model="filter.phone"></el-input>
@@ -184,7 +184,7 @@ export default {
       this.BLL.getList()
     },
     // 筛选数据
-    filterData () {
+    query () {
       this.BLL.getList()
     },
     // 下载

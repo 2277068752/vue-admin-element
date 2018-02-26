@@ -1,14 +1,12 @@
-<!--角色管理页面-->
 <template>
-  <div class="role-page">
-    <i-table></i-table>
+  <div class="MyContain">
+
   </div>
 </template>
 
 <script>
-import iTable from '../../components/iTable/Index'
 export default {
-  components: { iTable },
+  components: {},
   data () {
     return {}
   },
@@ -19,8 +17,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.role-page {
+.MyContain {
   background-color: #fff;
 }
 </style>
-`

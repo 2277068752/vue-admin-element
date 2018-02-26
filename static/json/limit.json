@@ -37,7 +37,7 @@
           {
             "icon": "",
             "name": "分页表格",
-            "action": "add,upload,reload",
+            "action": "query,add,download,reload",
             "link": "/table/list",
             "state": 1,
             "sort": 321
@@ -106,6 +106,36 @@
         "link": "/role/list",
         "state": 1,
         "sort": 52
+      },
+      {
+        "icon": "",
+        "name": "用户管理",
+        "link": "/user/list",
+        "state": 1,
+        "sort": 53
+      }
+    ]
+  },
+  {
+    "icon": "&#xe683;",
+    "name": "配置中心",
+    "link": "",
+    "state": 1,
+    "sort": 6,
+    "children": [
+      {
+        "icon": "",
+        "name": "短信码",
+        "link": "/smscode_config/list",
+        "state": 1,
+        "sort": 61
+      },
+      {
+        "icon": "",
+        "name": "错误码",
+        "link": "/errorcode_orconfig/list",
+        "state": 1,
+        "sort": 62
       }
     ]
   }

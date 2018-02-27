@@ -1,7 +1,7 @@
 <!--region 封装的分页 table-->
 <template>
   <div class="table">
-    <el-table id="iTable" v-loading.iTable="options.loading" :data="dataList" :max-height="height" border :stripe="options.stripe" @selection-change="handleSelectionChange">
+    <el-table id="iTable" v-loading.iTable="options.loading" :data="list" :max-height="height" border :stripe="options.stripe" ref="mutipleTable" @selection-change="handleSelectionChange">
       <!--region 选择框-->
       <el-table-column v-if="options.mutiSelect" type="selection" style="width: 55px;">
       </el-table-column>
@@ -87,6 +87,24 @@ export default {
   },
   components: {
     expandDom: {
+      /* functional: true,
+       props: {
+         row: Object,
+         render: Function,
+         index: Number,
+         column: {
+           type: Object,
+           default: null
+         }
+       },
+       render: (h, ctx) => {
+         const params = {
+           row: ctx.props.row,
+           index: ctx.props.index
+         }
+         if (ctx.props.column) params.column = ctx.props.column
+         return ctx.props.render(h, params)
+       } */
       props: {
         column: {
           required: true
@@ -103,15 +121,12 @@ export default {
   data () {
     return {
       pageIndex: 1,
-      dataList: [],
       tableCurrentPagination: {},
       multipleSelection: [] // 多行选中
     }
   },
-  created () {
-    if (this.list.length > 0) {
-      this.dataList = this.list
-    }
+  created () { },
+  mounted () {
     if (this.pagination && !this.pagination.pageSizes) {
       this.pagination.pageArray = _pageArray // 每页展示条数控制
     }
@@ -119,8 +134,6 @@ export default {
       pageSize: this.total,
       pageIndex: 1
     } // 判断是否需要分页
-  },
-  mounted () {
   },
   computed: {
     // 计算table高度
@@ -202,12 +215,11 @@ export default {
     }
   }
   .filter-data {
-    width: calc(#{"100% - 20px"});
-    top: calc(#{"(100% - 100px) / 3"});
+    top: e("calc((100% - 100px) / 3)");
     background-color: rgba(0, 0, 0, 0.7);
   }
   .table-action {
-    top: calc(#{"(100% - 100px) / 2"});
+    top: e("calc((100% - 100px) / 2)");
     background-color: rgba(0, 0, 0, 0.7);
   }
   .fix-right {

@@ -7,7 +7,7 @@ import store from './vuex/store'
 import VueParticles from 'vue-particles'
 import 'normalize.css/normalize.css'
 // vue-router
-import { sync } from 'vuex-router-sync'
+import {sync} from 'vuex-router-sync'
 import Routers from './router'
 import VueRouter from 'vue-router'
 // Element UI
@@ -18,7 +18,7 @@ import UtilsPlugin from './utils/index'
 import AlertPlugin from './plugs/Alert'
 // http
 import HttpPlugin from './http/index'
-import { Tag } from '../src/model/index'
+import {Tag} from '../src/model/index'
 // mock
 import './mock'
 
@@ -57,8 +57,7 @@ router.beforeEach((to, from, next) => {
     if (!havePath) {
       next('/error/404')
     } else {
-      // let current_path =
-      let tag = new Tag({ id: to.path, path: to.path, name: to.name })
+      let tag = new Tag({id: to.path, path: to.path, name: to.name})
       dispatch('add_tagbar', tag)
       // 每次都清空按钮操作缓存
       dispatch('empty_button')

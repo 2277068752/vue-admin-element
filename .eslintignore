@@ -2,4 +2,5 @@
 /config/
 /dist/
 /utils/common/
+/utils/modules/
 /*.js

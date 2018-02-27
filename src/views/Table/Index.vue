@@ -25,7 +25,7 @@
     <!--endregion-->
   </div>
 </template>
-<script>
+<script type="text/jsx">
 import FilterCollapse from '../../components/FilterCollapse/Index'
 import iTable from '../../components/iTable/Index'
 import BLL from './Index'
@@ -65,10 +65,8 @@ export default {
           align: 'center',
           width: '160',
           render: (row, column) => {
-            return row.state === 0 ? <el-tag type="success">上架</el-tag> : row.state === 1 ? <el-tag type="info">下架</el-tag> : <el-tag type="danger">审核中</el-tag>
-            // return h('el-tag', {
-            //   props: { type: params.row.state === 0 ? 'success' : params.row.state === 1 ? 'info' : 'danger' } // 组件的props
-            // }, params.row.state === 0 ? '上架' : params.row.state === 1 ? '下架' : '审核中')
+            return row.state === 0 ? <el-tag type="success">上架</el-tag> : row.state === 1 ?
+              <el-tag type="info">下架</el-tag> : <el-tag type="danger">审核中</el-tag>
           }
         },
         {
@@ -88,15 +86,6 @@ export default {
           label: '邮箱',
           align: 'center',
           width: 240
-        },
-        {
-          prop: 'createDate',
-          label: '发布时间',
-          align: 'center',
-          width: 180,
-          formatter: (row, column, cellValue) => {
-            return this.$utils.Common.dateFormat(row.createDate, 'YYYY年MM月DD日 hh:mm')
-          }
         }
       ], // 需要展示的列
       operates: {

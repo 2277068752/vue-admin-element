@@ -24,6 +24,8 @@ export default class extends Base {
     this.vm.loading = true
     // 取用户的平台权限信息，并且持久化
     this.vm.$store.dispatch('init_sidebar_data', this.vm.menus)
+    // 清空tab标签
+    this.vm.$store.dispatch('del_all_tags')
     // 登录成功
     this.vm.$notify.success({
       title: '登录成功',

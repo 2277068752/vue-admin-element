@@ -35,3 +35,10 @@
     border-radius: 4px;
   }
 }
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}

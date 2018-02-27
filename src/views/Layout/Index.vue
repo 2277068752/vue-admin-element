@@ -39,15 +39,18 @@
     .sidebar-container {
       transition: width 0.28s;
       width: $side-bar-width;
+      height: 100%;
       position: fixed;
       z-index: 1001;
       left: 0;
+      bottom: 0;
       top: 0;
     }
     .main-container {
       width: 100%;
       min-height: 100%;
-      padding-left: $side-bar-width;
+      margin-left: $side-bar-width;
+      transition: margin-left 0.28s;
     }
   }
 </style>

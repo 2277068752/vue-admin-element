@@ -47,7 +47,6 @@
       top: 0;
     }
     .main-container {
-      width: 100%;
       min-height: 100%;
       margin-left: $side-bar-width;
       transition: margin-left 0.28s;

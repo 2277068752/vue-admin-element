@@ -1,7 +1,7 @@
 <!--region 封装的分页 table-->
 <template>
   <div class="table">
-    <el-table id="iTable" v-loading.iTable="options.loading" :data="list" :max-height="height" border
+    <el-table id="iTable" v-loading.iTable="loading" :data="list" :max-height="height" border
               :stripe="options.stripe" ref="mutipleTable" @selection-change="handleSelectionChange">
       <!--region 选择框-->
       <el-table-column v-if="options.mutiSelect" type="selection" style="width: 55px;">
@@ -9,7 +9,8 @@
       <!--endregion-->
       <!--region 数据列-->
       <template v-for="(column, index) in columns">
-        <el-table-column :key="index" :prop="column.prop" :label="column.label" :align="column.align" :width="column.width"
+        <el-table-column :key="index" :prop="column.prop" :label="column.label" :align="column.align"
+                         :width="column.width"
                          :class-name="column.className">
           <template slot-scope="scope">
             <template v-if="!column.render">
@@ -46,7 +47,8 @@
     </el-table>
     <div style="height:12px"></div>
     <!--region 分页-->
-    <el-pagination v-if="pagination&&!options.loading" @size-change="handleSizeChange" @current-change="handleIndexChange"
+    <el-pagination v-if="pagination&&!options.loading" @size-change="handleSizeChange"
+                   @current-change="handleIndexChange"
                    :page-size="tableCurrentPagination.pageSize" :page-sizes="this.tableCurrentPagination.pageArray"
                    :current-page="tableCurrentPagination.pageIndex" layout="total,sizes, prev, pager, next,jumper"
                    :total="total"></el-pagination>
@@ -75,6 +77,7 @@ export default {
       type: Object,
       default: null // 分页参数 === pageSize:每页展示的条数，pageIndex:当前页，pageArray: 每页展示条数的控制集合，默认 _page_array
     },
+    loading: Boolean,
     otherHeight: {
       type: Number,
       default: 160
@@ -84,7 +87,6 @@ export default {
       default () {
         return {
           stripe: false, // 是否为斑马纹 table
-          loading: false, // 是否添加表格loading加载动画
           highlightCurrentRow: false, // 是否支持当前行高亮显示
           mutiSelect: false // 是否支持列表项选中功能
         }

@@ -2,36 +2,37 @@
  * axios 拦截器
  */
 import axios from 'axios'
-import { Message, Loading } from 'element-ui'
-
+import { Message } from 'element-ui'
 // 超时时间
 axios.defaults.timeout = 5000
 // http请求拦截器
-let loadinginstance
 axios.interceptors.request.use(config => {
+  // loading 加载
   if (config.headers.loading.load) {
-    loadinginstance = Loading.service({ fullscreen: true, text: config.headers.loading.loadMsg })
+    window.$globalHub.$store.commit('UPDATE_BTNLOADINGSTR', {
+      str: config.headers.loading.loadMsg,
+      id: config.headers.loading.load
+    })
   }
   return config
 }, error => {
-  loadinginstance.close()
+  window.$globalHub.$store.commit('UPDATE_BTNLOADINGSTR', null)
   Message.error({
     message: '加载超时'
   })
   return Promise.reject(error)
 })
-
 // http响应拦截器
 axios.interceptors.response.use(data => {
   if (data.config.headers.loading.load) {
-    loadinginstance.close()
+    window.$globalHub.$store.commit('UPDATE_BTNLOADINGSTR', null)
   }
   return data
 }, error => {
+  window.$globalHub.$store.commit('UPDATE_BTNLOADINGSTR', null)
   Message.error({
     message: '加载超时'
   })
   return Promise.reject(error)
 })
-
 export default axios

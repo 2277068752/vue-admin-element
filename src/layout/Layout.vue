@@ -1,9 +1,9 @@
 <template>
   <div class="app-wrapper" :class="{hideSidebar:menus.open === 1}">
     <sidebar class="sidebar-container"></sidebar>
-    <div class="main-container" :class="{'no-tags':!tagsView.show}">
+    <div class="main-container" :class="{'no-tags':!tags.show}">
       <navbar></navbar>
-      <tags-view v-if="tagsView.show"></tags-view>
+      <tags-view v-if="tags.show"></tags-view>
       <app-main></app-main>
     </div>
   </div>
@@ -23,10 +23,10 @@ export default {
   },
   computed: {
     ...mapState([
-      'tagsView', 'menus'
+      'tags', 'menus'
     ]),
     tagbar () {
-      return this.tagsView.tagbar
+      return this.tags.tagbar
     }
   }
 }

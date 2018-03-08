@@ -1,7 +1,8 @@
 <template>
   <div class="table-page">
     <!--region table 表格-->
-    <i-table :list="list" :total="total" :otherHeight="otherHeight" @handleSizeChange="handleSizeChange"
+    <i-table :list="list" :total="total" :loading="loading" :otherHeight="otherHeight"
+             @handleSizeChange="handleSizeChange"
              @handleIndexChange="handleIndexChange" @handleSelectionChange="handleSelectionChange" :options="options"
              :pagination="pagination" :columns="columns" :operates="operates">
     </i-table>
@@ -108,7 +109,6 @@ export default {
       }, // 分页参数
       options: {
         stripe: true, // 是否为斑马纹 table
-        loading: true, // 是否添加表格loading加载动画
         highlightCurrentRow: true, // 是否支持当前行高亮显示
         mutiSelect: true // 是否支持列表项选中功能
       } // table 的参数
@@ -121,9 +121,10 @@ export default {
     this.BLL.getList()
   },
   computed: {
-    ...mapGetters([
-      'button'
-    ])
+    ...mapGetters([]),
+    loading () {
+      return this.$store.getters.btnLoading.str && this.$store.getters.btnLoading.id
+    }
   },
   methods: {
     // 切换每页显示的数量

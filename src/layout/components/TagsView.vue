@@ -42,7 +42,7 @@ export default {
   mounted () {
   },
   computed: {
-    ...mapState({tagBar: ({tagsView}) => tagsView.tagbar})
+    ...mapState({tagBar: ({tags}) => tags.tagbar})
   },
   watch: {
     // 监听鼠标左击事件，点击机关闭右键菜单

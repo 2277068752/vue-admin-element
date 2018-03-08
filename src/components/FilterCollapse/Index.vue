@@ -4,12 +4,9 @@
       <el-collapse-item name="1">
         <template slot="title">
           {{ title }}
-          <el-button type="primary" class="filter-btn" size="mini" @click="handleFilter()"><i
-            class="el-icon-search"></i> 筛 选
-          </el-button>
           <div class="filter-items">
-            <template v-for="item in filterList">
-              <el-tag v-if="item[1]"> {{ item[1] }}</el-tag>
+            <template v-for="(item, index) in filterList">
+              <el-tag :key="index" v-if="item[1]"> {{ item[1] }}</el-tag>
             </template>
           </div>
         </template>

@@ -126,14 +126,14 @@
       {
         "icon": "",
         "name": "短信码",
-        "link": "/smscode_config/list",
+        "link": "/smsCode/list",
         "state": 1,
         "sort": 61
       },
       {
         "icon": "",
         "name": "错误码",
-        "link": "/errorcode_orconfig/list",
+        "link": "/errorCode/list",
         "state": 1,
         "sort": 62
       }

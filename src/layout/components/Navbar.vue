@@ -15,7 +15,7 @@
           </el-dropdown-item>
         </router-link>
         <el-dropdown-item>
-          <span @click="toggleTags" style="display:block;">多标签：{{ tagsView.show?'开':'关' }}</span>
+          <span @click="toggleTags" style="display:block;">多标签：{{ tags.show?'开':'关' }}</span>
         </el-dropdown-item>
         <el-dropdown-item divided>
           <span @click="logout" style="display:block;">退出</span>
@@ -37,7 +37,7 @@ export default {
   },
   computed: {
     ...mapState([
-      'menus', 'tagsView'
+      'menus', 'tags'
     ])
   },
   methods: {
@@ -50,11 +50,11 @@ export default {
       this.$router.push('/login')
     },
     toggleTags () {
-      if (this.tagsView.show) {
+      if (this.tags.show) {
         // 清空tags缓存
         this.$store.dispatch('del_all_tags')
       }
-      this.$store.dispatch('set_tag_state', !this.tagsView.show)
+      this.$store.dispatch('set_tag_state', !this.tags.show)
     }
   }
 }

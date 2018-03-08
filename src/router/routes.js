@@ -1,12 +1,12 @@
 /* eslint-disable no-undef */
-import NotFind from '../components/404.vue'
+import NotFind from '../pages/errors/404.vue'
 // 生产/测试环境，使用路由懒加载
-const view = process.env.NODE_ENV === 'development'
+const _import = process.env.NODE_ENV === 'development'
   ? file => require(`@/pages/${file}.vue`).default
   : file => () => System.import(`@/pages/${file}.vue`).then(m => m.default)
 export default [
-  { path: '/', component: view('login/Index') },
-  { path: '/login', component: view('login/Index') },
+  { path: '/', component: _import('login/Index') },
+  { path: '/login', component: _import('login/Index') },
   {
     path: '/main',
     component: resolve => require(['../layout/Layout'], resolve),
@@ -18,11 +18,43 @@ export default [
       }, {
         path: '/dashboard',
         name: '首页',
-        component: view('dashboard/DashBoard')
+        component: _import('dashboard/Index')
       }, {
         path: '/table/list',
         name: '表格',
-        component: view('Table/Index')
+        component: _import('table/Index')
+      }, {
+        path: '/icons',
+        name: '图标',
+        component: _import('icons/Index')
+      }, {
+        path: '/role/list',
+        name: '角色管理',
+        component: _import('roles/Index')
+      }, {
+        path: '/user/list',
+        name: '用户管理',
+        component: _import('users/Index')
+      }, {
+        path: '/menus/list',
+        name: '菜单设置',
+        component: _import('menus/Index')
+      }, {
+        path: '/smsCode/list',
+        name: '短信码',
+        component: _import('smsCode/Index')
+      }, {
+        path: '/errorCode/list',
+        name: '错误码',
+        component: _import('errorCode/Index')
+      }, {
+        path: '/error/404',
+        name: '404',
+        component: NotFind
+      }, {
+        path: '/error/401',
+        name: '401',
+        component: _import('errors/401')
       }
     ]
   }

@@ -16,6 +16,9 @@ import ScrollBar from '../../../components/ScrollBar'
 
 export default {
   components: { SidebarItem, ScrollBar },
+  created () {
+    console.log('$route.path:', this.$route.path)
+  },
   computed: {
     ...mapState([
       'menus'

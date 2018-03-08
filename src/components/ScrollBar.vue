@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 const delta = 15
 export default {
@@ -18,13 +18,13 @@ export default {
     }
   },
   created () {
-    if (!this.sidebar.open) {
+    if (!this.menus.open) {
       this.min = 0
     }
   },
   computed: {
-    ...mapGetters([
-      'sidebar'
+    ...mapState([
+      'menus'
     ])
   },
   methods: {

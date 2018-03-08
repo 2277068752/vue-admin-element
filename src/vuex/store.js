@@ -8,7 +8,7 @@ import localStorage from '../assets/utils/localStorage'
 import auth from './modules/auth'
 import menus from './modules/menus'
 import global from './modules/global'
-import tagsView from './modules/tagsView'
+import tags from './modules/tags'
 
 Vue.use(Vuex)
 export default new Vuex.Store({
@@ -17,7 +17,7 @@ export default new Vuex.Store({
     global,
     menus,
     auth,
-    tagsView
+    tags
   },
   // 插件
   plugins: [createPersistedState({

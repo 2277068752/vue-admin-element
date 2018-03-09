@@ -1,7 +1,7 @@
 <template>
   <!--region tab导航切换页-->
   <div class="tag-bar">
-    <scroll-pane class='tags-view-wrapper' ref='scrollPane'>
+    <div class="tags-view-wrapper">
       <template v-for="(item, index) in tagBar">
         <div :key="index" :class="tagActive(item) ? 'tag-item active' : 'tag-item'"
              @click.right="rightMenus($event, item)">
@@ -23,16 +23,15 @@
         </li>
       </ul>
       <!--endregion-->
-    </scroll-pane>
+    </div>
   </div>
   <!--endregion-->
 </template>
 <script>
-import {mapState} from 'vuex'
-import ScrollPane from '../../components/ScrollPane'
+import { mapState } from 'vuex'
 
 export default {
-  components: {ScrollPane},
+  components: {},
   data () {
     return {
       rightMenuShow: false,
@@ -42,7 +41,7 @@ export default {
   mounted () {
   },
   computed: {
-    ...mapState({tagBar: ({tags}) => tags.tagbar})
+    ...mapState({ tagBar: ({ tags }) => tags.tagbar })
   },
   watch: {
     // 监听鼠标左击事件，点击机关闭右键菜单
@@ -71,12 +70,12 @@ export default {
     closeThisTag (tag, index) {
       // 判断关闭的是否为当前激活的tag标签
       if (this.tagActive(tag)) {
-        let preTag = this.tagbar.list[index - 1]
+        let preTag = this.tagBar[index - 1]
         // 启用前一个标签
         if (preTag) {
-          this.$router.push({path: preTag.path})
+          this.$router.push({ path: preTag.path })
         } else {
-          this.$router.push({path: '/dashboard'})
+          this.$router.push({ path: '/dashboard' })
         }
       }
       this.$store.dispatch('del_tagbar_item', tag)
@@ -85,7 +84,7 @@ export default {
     closeOtherTag () {
       this.confirm('你真的要关闭其他的标签么？只保留这一个？', '关闭其他', '取消', 'warning', () => {
         this.$store.dispatch('del_other_tags', this.currentTag).then(res => {
-          this.$router.push({path: res.path})
+          this.$router.push({ path: res.path })
         })
       })
     },
@@ -93,13 +92,13 @@ export default {
     closeAllTags () {
       this.confirm('打开这么多的标签，确认都不需要了？', '关闭所有', '取消', 'warning', () => {
         this.$store.dispatch('del_all_tags').then(res => {
-          this.$router.push({path: res.path})
+          this.$router.push({ path: res.path })
         })
       })
     },
     // 鼠标右键的关闭当前标签
     closeThisTagOfRightMenu () {
-      let _index = this.tagbar.list.indexOf(this.currentTag)
+      let _index = this.tagBar.indexOf(this.currentTag)
       this.closeThisTag(this.currentTag, _index)
     },
     // 鼠标右击事件
@@ -144,75 +143,75 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "../../styles/font";
+@import "../../styles/font";
 
-  .tag-bar {
-    $height: 26px;
-    position: fixed;
-    top: 50px;
-    width: 100%;
-    z-index: 100;
-    .tags-view-wrapper {
-      background: #fff;
-      height: 34px;
-      line-height: 34px;
-      border-bottom: 1px solid #d8dce5;
-      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 0 3px 0 rgba(0, 0, 0, .04);
-      .tag-item {
-        display: inline-block;
-        border: 1px solid #d8dce5;
-        height: $height;
-        line-height: $height;
-        padding: 0 12px;
-        margin-left:12px;
-        border-radius: 2px;
-        color: #495060;
-        font-size: $font-size-s;
-        a {
-          padding-right: 12px;
-        }
-        .tag-close {
-          cursor: pointer;
-          width: 16px;
-          height: 16px;
-          border-radius: 50%;
-          text-align: center;
-          transition: all 0.3s;
-          transform-origin: 100% 50%;
-          vertical-align: 0;
-          line-height: 16px;
-          &:hover {
-            background-color: #b4bccc;
-            color: #fff;
-          }
-        }
-        &.active {
-          background-color: #42b983;
-          border-color: #42b983;
+.tag-bar {
+  $height: 26px;
+  position: fixed;
+  top: 50px;
+  width: 100%;
+  z-index: 100;
+  .tags-view-wrapper {
+    background: #fff;
+    height: 34px;
+    line-height: 34px;
+    border-bottom: 1px solid #d8dce5;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 0 3px 0 rgba(0, 0, 0, .04);
+    .tag-item {
+      display: inline-block;
+      border: 1px solid #d8dce5;
+      height: $height;
+      line-height: $height;
+      padding: 0 12px;
+      margin-left: 12px;
+      border-radius: 2px;
+      color: #495060;
+      font-size: $font-size-s;
+      a {
+        padding-right: 12px;
+      }
+      .tag-close {
+        cursor: pointer;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        text-align: center;
+        transition: all 0.3s;
+        transform-origin: 100% 50%;
+        vertical-align: 0;
+        line-height: 16px;
+        &:hover {
+          background-color: #b4bccc;
           color: #fff;
         }
       }
-      ul.context-menu {
-        position: absolute;
-        list-style-type: none;
-        box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.3);
-        margin: 0;
-        padding: 7px 0;
-        z-index: 10002;
-        background-color: #fff;
-        border-radius: 4px;
-        .item {
-          $right-menu-item-height: 30px;
-          list-style: none;
-          height: $right-menu-item-height;
-          padding: 0 20px;
-          line-height: $right-menu-item-height;
-          &:hover {
-            background-color: #eee;
-            color: #333;
-          }
+      &.active {
+        background-color: #42b983;
+        border-color: #42b983;
+        color: #fff;
+      }
+    }
+    ul.context-menu {
+      position: absolute;
+      list-style-type: none;
+      box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.3);
+      margin: 0;
+      padding: 7px 0;
+      z-index: 10002;
+      background-color: #fff;
+      border-radius: 4px;
+      .item {
+        $right-menu-item-height: 30px;
+        list-style: none;
+        height: $right-menu-item-height;
+        padding: 0 20px;
+        line-height: $right-menu-item-height;
+        &:hover {
+          background-color: #eee;
+          color: #333;
         }
       }
     }
   }
+}
 </style>

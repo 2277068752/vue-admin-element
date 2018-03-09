@@ -48,11 +48,11 @@ export default [
         name: '错误码',
         component: _import('errorCode/Index')
       }, {
-        path: '/error/404',
+        path: '/404',
         name: '404',
         component: NotFind
       }, {
-        path: '/error/401',
+        path: '/401',
         name: '401',
         component: _import('errors/401')
       }

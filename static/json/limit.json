@@ -21,13 +21,6 @@
     "sort": 3,
     "children": [
       {
-        "icon": "",
-        "name": "富文本编辑器",
-        "link": "/tinyMce",
-        "state": 0,
-        "sort": 31
-      },
-      {
         "icon": "&#xe600;",
         "name": "表格",
         "link": "",

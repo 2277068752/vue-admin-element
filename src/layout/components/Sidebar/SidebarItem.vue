@@ -1,23 +1,26 @@
 <template>
   <div class="menu-wrapper">
     <template v-for="(item, index) in routes">
-      <el-menu-item :index="item.name ||item.link" v-if="!item.children" :key="item.name"
-                    :class="{'submenu-title-noDropdown':!isNest}" @click="toPath(item.link)">
-        <i class="axon-icon" v-html="item.icon"></i>
-        <span v-if="item.name" slot="title">{{ item.name }}</span>
-      </el-menu-item>
-      <el-submenu v-else :index="index.toString()" :key="item.index">
+      <router-link v-if="!item.children" :to="item.link" :key="index">
+        <el-menu-item :index="item.link"
+                      :class="{'submenu-title-noDropdown':!isNest}">
+          <i class="axon-icon" v-html="item.icon"></i>
+          <span v-if="item.name" slot="title">{{ item.name }}</span>
+        </el-menu-item>
+      </router-link>
+      <el-submenu v-else :index="item.name || item.link" :key="index">
         <template slot="title">
           <i class="axon-icon" v-html="item.icon"></i>
           <span>{{ item.name }}</span>
         </template>
         <template v-for="(child, childIndex) in item.children">
-          <el-menu-item :index="index.toString() +'-' +childIndex.toString()" :key="index+'-' +childIndex"
-                        v-if="!child.children" @click="toPath(child.link)">
-            <span v-if="item.name">{{ child.name }}</span>
-          </el-menu-item>
+          <router-link v-if="!child.children" :to="child.link" :key="index + '-' + childIndex">
+            <el-menu-item :index="child.link">
+              <span v-if="item.name">{{ child.name }}</span>
+            </el-menu-item>
+          </router-link>
           <sidebar-item v-else :is-nest="true" class="nest-menu" :routes="[child]"
-                        :key="index+'-' +childIndex"></sidebar-item>
+                        :key="index + '-' + childIndex"></sidebar-item>
         </template>
       </el-submenu>
     </template>

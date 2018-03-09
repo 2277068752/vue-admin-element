@@ -25,7 +25,9 @@ axios.interceptors.request.use(config => {
 // http响应拦截器
 axios.interceptors.response.use(data => {
   if (data.config.headers.loading.load) {
-    window.$globalHub.$store.commit('UPDATE_BTNLOADINGSTR', null)
+    setTimeout(() => {
+      window.$globalHub.$store.commit('UPDATE_BTNLOADINGSTR', null)
+    }, 2000)
   }
   return data
 }, error => {

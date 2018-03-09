@@ -84,7 +84,7 @@ export default {
             type: 'warning',
             show: true,
             icon: 'el-icon-edit',
-            plain: true,
+            plain: false,
             disabled: false,
             method: (index, row) => {
               this.handleEdit(index, row)
@@ -121,7 +121,7 @@ export default {
     this.BLL.getList()
   },
   computed: {
-    ...mapGetters([]),
+    ...mapGetters(['button']),
     loading () {
       return this.$store.getters.btnLoading.str && this.$store.getters.btnLoading.id
     }

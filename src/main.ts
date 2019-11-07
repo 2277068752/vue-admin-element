@@ -18,6 +18,35 @@ Vue.config.productionTip = true;
 if (process.env.VUE_APP_CURRENTMODE === 'development') {
   Vue.use(elementUI, {size: 'small'});
 }
+store.dispatch('setMenus', [
+  {
+    id: 1,
+    icon: 'home',
+    name: '首页',
+    path: '/home',
+    sort: 1,
+    status: 0,
+    children: []
+  },
+  {
+    id: 3,
+    name: '用户管理',
+    icon: 'menu',
+    path: '',
+    sort: 3,
+    status: 0,
+    children: [
+      {
+        id: 31,
+        name: '用户列表',
+        icon: '',
+        path: '/user/list',
+        sort: 31,
+        status: 0
+      }
+    ]
+  }
+]);
 Vue.use(UtilsPlugin);
 Vue.use(HttpPlugin);
 sync(store, router);

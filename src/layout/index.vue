@@ -39,15 +39,15 @@ export default class LayoutPage extends Vue {
   min-height: 100%;
   height: 100%;
   display: flex;
+  flex: auto;
   flex-direction: row;
   background-color: #f7f7f7;
 
   .layout-inside {
-    flex: 0 0 1;
+    flex: auto;
     width: 100%;
     display: flex;
     flex-direction: column;
-    transition: width 0.28s;
     overflow-y: hidden;
 
     .inside-content {

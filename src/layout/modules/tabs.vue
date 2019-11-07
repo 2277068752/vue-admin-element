@@ -22,22 +22,26 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component} from 'vue-property-decorator';
+import {Vue, Component, Watch} from 'vue-property-decorator';
 import {Action, Getter} from 'vuex-class';
 import Menu from '@/model/global/Menu';
+import {Route} from 'vue-router';
 
 @Component({})
 export default class TheTabs extends Vue {
   @Getter('tabs') public tabs!: Menu[];
   @Getter('index') public index!: Menu;
+  @Getter('menus') private menus!: Menu[];
   @Action('delTab') public delTab: any;
   @Action('addTab') public addTab: any;
 
   get currPath (): string {
-    return this.$route.fullPath;
+    return this.$route.path;
   }
 
-  public mounted () {
+  @Watch('$route', {deep: true, immediate: true})
+  onRouteChange (to: any) {
+    this.handleAddTagByRoute(to);
   }
 
   /**
@@ -68,6 +72,16 @@ export default class TheTabs extends Vue {
       this.$router.push({path: pre.path});
     }
     this.delTab(tab);
+  }
+
+  /**
+   * 根据路由变化，同步当前多标签
+   * @param to
+   */
+  private handleAddTagByRoute (to: Menu) {
+    this.$nextTick(() => {
+      this.addTab(to);
+    });
   }
 }
 </script>

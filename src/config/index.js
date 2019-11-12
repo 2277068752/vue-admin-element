@@ -6,17 +6,12 @@
  */
 module.exports = {
   Interfaces: {
-    equipment: {
-      lease: {
-        list: 'charge/charge/chargeCabinet'
-      }
-    }
   },
   Proxy: {
-    dev: ['charge'],
+    dev: ['statistics'],
     domain: {
-      charge: {
-        development: 'http://114.67.96.165:8080/',
+      statistics: {
+        development: 'http://risktest.aegis-info.com/',
         pre: 'http://risktest.aegis-info.com/',
         production: 'http://risktest.aegis-info.com/'
       }

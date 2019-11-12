@@ -13,7 +13,6 @@ const productionGzipExtensions = ['js', 'css'];
 const cdn = {
   css: ['//unpkg.com/element-ui/lib/theme-chalk/index.css'],
   js: [
-    '//cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js',
     '//cdn.jsdelivr.net/npm/vuex@3.1.1/dist/vuex.min.js',
     '//cdn.jsdelivr.net/npm/vue-router@3.0.6/dist/vue-router.min.js',
     '//unpkg.com/element-ui/lib/index.js',
@@ -47,7 +46,6 @@ module.exports = {
   configureWebpack: config => {
     if (ENV !== 'development') {
       config.externals = {
-        'vue': 'Vue',
         'vuex': 'Vuex',
         'vue-router': 'VueRouter',
         'element-ui': 'ELEMENT',
